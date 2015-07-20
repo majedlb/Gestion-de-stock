@@ -1,0 +1,20 @@
+Nous sommes dans le cas d'une entreprise présentant plusieurs branches qui sont à leurs tours organisées en différents départements et sous-départements.
+
+Chacune de ces branches peut spécifier ses besoins en matériels et fournitures ainsi qu'évaluer et choisir les différents marques et fournisseurs d'une façon indépendante. Chaque branche possède sa propre "gestion des stock" et ce service est responsable de la gestion adéquate des approvisionnements et de leur rotation efficace intra-branche ainsi que des transferts entre-branches en cas de besoin. L'objectif de ce projet est d'organiser cette gestion des stocks.
+
+Nous proposons une organisation selon les étapes suivantes:
+
+• L'entreprise est organisée en différentes branches
+• Chaque Branche a une seule location et est divisée en différents départements.
+• Chaque département présente différents sous-départements ou sections, chacun présentant
+
+plusieurs employés.
+• A chaque employé est attribué un seul poste principal.
+• Chaque branche possède un seul Stock de matériels, et ces différents produits sont organisés 
+en catégories.
+• Ce stock fournit les différents départements de la même branche.
+• Ce stock peut fournir aussi les stocks des autres branches. Ce transfert est effectué par le 
+service de transport (service postal de l'entreprise).
+• A chaque acquisition d'un nouveau produit, un code lui sera attribué selon sa catégorie.
+
+Ainsi, pour chaque produit, et à n'importe quel moment et grâce à son code, un repérage et distribution rapide intra-branche ou entre-branches sera possible, de même qu'un inventaire minutieux et continuel.
