@@ -1,0 +1,1124 @@
+/* Procedure structure for procedure `addNewBranch` */
+
+DELIMITER $$
+
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS `addNewBranch`$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addNewBranch`(
+					IN branchcnameAdd VARCHAR(50),IN branchphoneAdd VARCHAR(20),locationidAdd INT)
+
+BEGIN
+ 
+  
+	INSERT INTO branches(nameb,phone,location_id) VALUES(branchcnameAdd,branchphoneAdd,locationidAdd);
+
+    SELECT ROW_COUNT();
+
+END$$
+
+DELIMITER ;
+
+
+
+/* Procedure structure for procedure `addNewCategorie` */
+
+DELIMITER $$
+
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS `addNewCategorie`$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addNewCategorie`(IN categorieNameAdd VARCHAR(50),categorieDescAdd VARCHAR (120))
+
+BEGIN
+
+	INSERT INTO categorie(namec,des) VALUES(categorieNameAdd,categorieDescAdd);
+
+	SELECT ROW_COUNT();
+
+END$$
+
+DELIMITER ;
+
+
+/* Procedure structure for procedure `addNewCity` */
+
+DELIMITER $$
+
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS `addNewCity`$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addNewCity`(IN cityNameAdd VARCHAR(20))
+
+BEGIN
+
+	INSERT INTO cities(namecit) VALUES(cityNameAdd);
+    
+	SELECT ROW_COUNT();
+    
+
+END$$
+
+DELIMITER ;
+
+
+/* Procedure structure for procedure `addNewDepartment` */
+DELIMITER $$
+
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `addNewDepartment` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addNewDepartment`(in departmentName varchar(50),departmentPhone varchar(20),branchIdAdd int)
+BEGIn
+	insert into department(namedep,phone,branchid) values (departmentNameAdd,departmentPhoneAdd,branchIdAdd);
+	SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `addNewDriving` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `addNewDriving` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addNewDriving`(in vehicleIdAdd int,employeeIdAdd int,drivDateAdd datetime,drivDescAdd varchar(120))
+BEGIN
+	INSERT INTO driving(vehicleid,employeeid,drivdate,drivdesc)
+		VALUES(vehicleIdAdd,employeeIdAdd,drivDateAdd,drivDescAdd);
+    	SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `addNewEmployee` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `addNewEmployee` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addNewEmployee`(
+					in employeeNameAdd varchar (50),employeeAdressAdd varchar(80),
+					   employeePhoneAdd varchar(20),employeeEmailAdd varchar(20),roomIdAdd int,
+					   employeeTypeAdd int,branchIdAdd int,departmentIdAdd int,stockIdAdd int)
+BEGIN
+	insert into employee(nameemp,adress,phone,email,roomid,employeetypeid,branchid,departmentid,stockid) 
+       values(employeeNameAdd,employeeAdressAdd,employeePhoneAdd,employeeEmailAdd,roomIdAdd,employeeTypeAdd,branchIdAdd,
+              departmentIdAdd,stockIdAdd);
+    SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `addNewEmployeetype` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `addNewEmployeetype` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addNewEmployeetype`(
+						in employeeNametypeAdd varchar(50),in employeeDesctypeAdd varchar(120))
+BEGIN
+	insert into employeetype(nametype,desctype) values (employeeNametypeAdd,employeeDesctypeAdd);
+	SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `addNewInvoice` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `addNewInvoice` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addNewInvoice`(in invoiceNameAdd varchar(50),invoiceDateAdd date,
+								invoiceDiscAdd int,stockIdAdd int,supplierIdAdd int)
+BEGIN
+	insert into invoice(nameinv,dateinv,disc,stockid,supplierid) 
+		values(invoiceNameAdd,invoiceDateAdd,invoiceDiscAdd,stockIdAdd,supplierIdAdd);
+	SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `addNewInvoiceProduct` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `addNewInvoiceProduct` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addNewInvoiceProduct`(
+						in productIdAdd int,invoiceIdAdd int,invprodDateAdd datetime,
+							priceUniteAdd decimal(10,2),qtAdd decimal(5,0),discAdd decimal(2,2))
+BEGIN
+	INSERT INTO invoiceproduct(productid,invoiceid,invproddate,priceunite,qt,disc) 
+		VALUES(productIdAdd,invoiceIdAdd,invprodDateAdd,priceUniteAdd,qtAdd,discAdd);
+    	SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `addNewLocation` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `addNewLocation` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addNewLocation`(in locationNameAdd varchar(20), cityIdAdd int)
+
+BEGIN
+	insert into locations(nameloc,cityid) values(locationNameAdd,cityIdAdd);
+	select row_count();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `addNewProduct` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `addNewProduct` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addNewProduct`(in productNameAdd varchar(50),categorieIdAdd int)
+BEGIN
+	insert into product(nameprod,categorieid) values(productNameAdd,categorieIdAdd);
+	SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `addNewProductRoom` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `addNewProductRoom` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addNewProductRoom`(in productIdAdd int,roomIdAdd int,
+						productroomDateAdd datetime,qtAdd decimal(5,0))
+BEGIN
+	INSERT INTO productroom(productid,roomid,productroomdate,qt) 
+		VALUES(productIdAdd,roomIdAdd,productroomDateAdd,qtAdd);
+    	SELECT ROW_COUNT();
+ END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `addNewProductSupplier` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `addNewProductSupplier` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addNewProductSupplier`(in prodIdAdd int,suppIdAdd int,prodsuppDateAdd datetime,
+									priceAdd decimal(10,2))
+BEGIN
+	INSERT INTO productsupplier(prodid,suppid,prodsuppdate,price) 
+		VALUES(prodIdAdd,suppIdAdd,prodsuppDateAdd,priceAdd);
+	SELECT ROW_COUNT();
+    
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `addNewRoom` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `addNewRoom` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addNewRoom`(in roomNameAdd varchar(50),roomPhoneAdd int(20),departmentIdAdd int)
+
+BEGIN
+	insert into room(nameroom,phone,departmentid) values(roomNameAdd,roomPhoneAdd,departmentIdAdd);
+	SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `addNewStock` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `addNewStock` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addNewStock`(in stockNameAdd varchar(500),in stockPhoneAdd int(2),
+								branchIdAdd int)
+BEGIN
+	insert into stock(namestck,phone,branchid) values(stockNameAdd,stockPhoneAdd,branchIdAdd);
+	SELECT ROW_COUNT();    
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `addNewStockProduct` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `addNewStockProduct` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addNewStockProduct`(IN stockIdAdd INT,productIdAdd INT,DateAdd DATETIME,
+						qtAdd DECIMAL(5,0),flagminQtAdd BOOLEAN)
+BEGIN
+	INSERT INTO stockproduct(stockid,productid,stockproductdate,qt,flagminqt) 
+		VALUES(stockIdAdd,productIdAdd,DateAdd,qtAdd,flagminQtAdd);
+	SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `addNewSupplier` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `addNewSupplier` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addNewSupplier`(in supplierNameAdd varchar(50),supplierPhoneAdd int,
+							supplierAdressAdd varchar(80),supplierEmailAdd varchar(20))
+BEGIN
+  
+	INSERT INTO branches(namesupp,phone,adress,email) 
+		VALUES(supplierNameAdd,supplierPhoneAdd,supplierAdressAdd,supplierEmailAdd);
+	SELECT ROW_COUNT();
+    
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `addNewTransfer` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `addNewTransfer` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addNewTransfer`(in stockIdAdd int,vehicleIdAdd int,productIdAdd int,
+								transferDateAdd datetime,qtAdd int)
+BEGIN
+	INSERT INTO transfer(stockid,vehicleid,productid,transferdate,qt) 
+		VALUES(stockIdAdd,vehicleIdAdd,productIdAdd,transferDateAdd,qtAdd);
+	SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `addNewUsers` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `addNewUsers` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addNewUsers`(in usersNameAdd varchar(20),in userPassAdd varchar(20),
+								in usersValidAdd varchar(1),EmployeeIdAdd int)
+BEGIN
+	insert into users(username,userpass,valid,employeeid) values (usersNameAdd,usersPassAdd,usersValidAdd,EmployeeIdAdd);
+	SELECT ROW_COUNT();    
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `addNewVehicle` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `addNewVehicle` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addNewVehicle`(in vehicleNameAdd varchar(50),stockIdAdd int)
+BEGIN
+	insert into vehicle(nameveh,stockid) values (vehicleNameAdd,stockIdAdd);
+	SELECT ROW_COUNT();    
+    
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `ContentsProductsOfRoomBetweenDate` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `ContentsProductsOfRoomBetweenDate` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ContentsProductsOfRoomBetweenDate`(IN inputRoomid INT,firstdate DATETIME,lastdate DATETIME)
+BEGIN
+SELECT PR.product-id, PR.room-id, P.nameprod,R.nameroom, PR.date FROM product P, room R, productroom PR 
+    WHERE p.id=PR.product-id AND R.id=PR.room-id AND PR.room-id=inputRoomid AND PR.date BETWEEN firstdate AND lastdate;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `ContentsProductsOfStockBetweenDate` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `ContentsProductsOfStockBetweenDate` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ContentsProductsOfStockBetweenDate`(IN inputstockid INT,firstdate DATETIME,lastdate DATETIME)
+BEGIN
+SELECT SP.stock-id,Sp.product-id,P.nameprod,S.namestck,SP.date,SP.qt FROM product P,stock S,stockproduct SP
+   WHERE p.id=SP.product-id AND S.id=SP.stock-id AND 
+         SP.stock-id=inputstockid AND SP.date BETWEEN firstdate AND lastdate;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `deleteBranchById` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `deleteBranchById` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteBranchById`(in iddelete int)
+BEGIN
+DELETE FROM `branches`
+		WHERE `branches`.`id` = iddelete;
+		SELECT ROW_COUNT();
+END */$$
+
+DELIMITER ;
+
+/* Procedure structure for procedure `deleteCategorieById` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `deleteCategorieById` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteCategorieById`(in iddelete int)
+BEGIN
+	DELETE FROM `cities` WHERE `categorie`.`id` = iddelete;
+	SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `deleteCityById` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `deleteCityById` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteCityById`(in iddelete int)
+BEGIN
+		delete from `cities` where `cities`.`id` = iddelete;
+		select row_count();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `deleteDepartmentById` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `deleteDepartmentById` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteDepartmentById`(in iddelete int)
+BEGIN
+	DELETE FROM `department` WHERE `department`.`id` = iddelete;
+	SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `deleteEmployeeById` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `deleteEmployeeById` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteEmployeeById`(in iddelete int)
+BEGIN
+	DELETE FROM `employee`	WHERE `employee`.`id` = iddelete;
+	SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `deleteEmployeeTypeById` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `deleteEmployeeTypeById` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteEmployeeTypeById`(in iddelete int)
+BEGIN
+	DELETE FROM `employeetype` WHERE `employeetype`.`id` = iddelete;
+	SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `deleteInvoiceById` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `deleteInvoiceById` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteInvoiceById`(in iddelete int)
+BEGIN
+	DELETE FROM `invoice`	WHERE `invoice`.`id` = iddelete;
+	SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `deleteLocationById` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `deleteLocationById` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteLocationById`(in iddelete int)
+BEGIN
+	DELETE FROM `locations`	WHERE `locations`.`id` = iddelete;
+	SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `deleteProductByid` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `deleteProductByid` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteProductByid`(in iddelete int)
+BEGIN
+	DELETE FROM `product` WHERE `product`.`id` = iddelete;
+	SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `deleteRomById` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `deleteRomById` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteRomById`(in iddelete int)
+BEGIN
+	DELETE FROM `room` WHERE `roomm`.`id` = iddelete;
+	SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `deleteStockById` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `deleteStockById` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteStockById`(in iddelete int)
+BEGIN
+	DELETE FROM `stock` WHERE `stock`.`id` = iddelete;
+	SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `deleteSupplierById` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `deleteSupplierById` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteSupplierById`(in iddelte int)
+BEGIN
+	DELETE FROM `supplier`	WHERE `supplier`.`id` = iddelete;
+	SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `deleteUser` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `deleteUser` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteUser`(IN usernamedelete VARCHAR(20))
+BEGIN
+	DELETE FROM `users` WHERE `users`.`username` = usernamedelete;
+	SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `deleteVehicleById` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `deleteVehicleById` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteVehicleById`(in iddelete int)
+BEGIN
+	DELETE FROM `vehicle`	WHERE `vehicle`.`id` = iddelete;
+	SELECT ROW_COUNT();
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `EmployeesDriveVehicleBetweenDate` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `EmployeesDriveVehicleBetweenDate` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EmployeesDriveVehicleBetweenDate`(IN VehicleidSearch int,firstdatedriv DATETIME,lastdatedrive DATETIME)
+BEGIN
+SELECT VEH.id,VEH.nameveh,EMP.id,EMP.nameemp,EMP,adress,EMP.phone,EMP.email,DRIV.datedriv 
+      FROM vehicle VEH,employee EMP,driving DRIV
+        WHERE DRIV.Vehicle-id=VEH.id AND DRIV.employee-id=EMP.id 
+              and DRIV.Vehicle-id=VehicleidSearch AND DRIV.datedriv BETWEEN firstdatedriv AND lastdatedrive;
+END */$$
+
+DELIMITER ;
+
+/* Procedure structure for procedure `InvoicesBetweenDate` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `InvoicesBetweenDate` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InvoicesBetweenDate`(IN fristdate datetime,lastdate datetime)
+BEGIN
+SELECT PROD.id,PROD.nameprod,INV.id,INV.nameinv, INVPROD.dateinvprod,INVPROD.priceunite,INVPROD.qt,SUP.id,SUP.namesup 
+  FROM product PROD,invoice INV,supplier SUP,invoiceproduct INVPROD,Productsupplier PRODSUP
+  WHERE INVPROD.product-id=PROD.id AND INVPROD.invoice-id=INV.id AND PROSUP.supp-id=SUP.id AND PROSUP.prod-id=PROD.id
+            AND INVPROD.dateinvprod BETWEEN fristdate AND lastdate;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `invoicesofSupplier` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `invoicesofSupplier` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `invoicesofSupplier`(in NameSupSearch varchar (20))
+BEGIN
+SELECT PROD.id,PROD.nameprod,INV.id,INV.nameinv, INVPROD.dateinvprod,INVPROD.priceunite,INVPROD.qt,SUP.id,SUP.namesup 
+  FROM product PROD,invoice INV,supplier SUP,invoiceproduct INVPROD,Productsupplier PRODSUP
+  WHERE INVPROD.product-id=PROD.id AND INVPROD.invoice-id=INV.id AND PROSUP.supp-id=SUP.id AND PROSUP.prod-id=PROD.id
+            AND SUP.namesup=NameSupSearch;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `ProductinAnyRoomBetweenDate` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `ProductinAnyRoomBetweenDate` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ProductinAnyRoomBetweenDate`(IN inputProductid INT,firstdate DATETIME,lastdate DATETIME)
+BEGIN
+SELECT PR.product-id, PR.room-id, P.nameprod,R.nameroom, PR.date,PR.qt FROM product P, room R, productroom PR 
+   WHERE p.id=PR.product-id AND R.id=PR.room-id AND 
+         PR.product-id=inputProductid AND PR.date BETWEEN firstdate AND lastdate;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `ProductInformationRespectSupplierByDate` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `ProductInformationRespectSupplierByDate` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ProductInformationRespectSupplierByDate`(IN inputProdid INT,firstdate DATETIME,lastdate DATETIME)
+BEGIN
+SELECT PSUP.prod-id,PSUP.supp-id,PSUP.date,PSUP.price,S.namesup,P.nameprod FROM productsupplier PSUP,product P,supplier S
+WHERE PSUP.prod-id=inputProdid AND PSUP.date BETWEEN firstdate AND lastdate;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `ProductInformationRespectSupplierByPrice` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `ProductInformationRespectSupplierByPrice` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ProductInformationRespectSupplierByPrice`(IN firstprice decimal(10,2),lastprice Decimal(10,2))
+BEGIN
+SELECT PSUP.prod-id,PSUP.supp-id,PSUP.date,PSUP.price,S.namesup,P.nameprod FROM productsupplier PSUP,product P,supplier S
+WHERE PSUP.prod-id=P.id and PSUP.supp-id=S.id AND PSUP.price BETWEEN firstprice AND lastprice;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `ProductinWhichRoomBetweendate` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `ProductinWhichRoomBetweendate` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ProductinWhichRoomBetweendate`(IN inputProductid INT,firstdate DATETIME,lastdate DATETIME)
+BEGIN
+SELECT PR.product-id, PR.room-id, P.nameprod,R.nameroom, PR.date,PR.qt FROM product P, room R, productroom PR 
+   WHERE p.id=PR.product-id AND R.id=PR.room-id AND 
+         PR.product-id=inputProductid AND PR.date BETWEEN firstdate AND lastdate;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `ProductinWhichStockBetweendate` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `ProductinWhichStockBetweendate` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ProductinWhichStockBetweendate`(IN inputProductid INT,firstdate DATETIME,lastdate DATETIME)
+BEGIN
+SELECT SP.stock-id,Sp.product-id,P.nameprod,S.namestck,SP.date,SP.qt FROM product P,stock S,stockproduct SP
+   WHERE p.id=SP.product-id AND S.id=SP.stock-id AND 
+         SP.product-id=inputProductid AND SP.date BETWEEN firstdate AND lastdate;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `ProductofSupplier` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `ProductofSupplier` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ProductofSupplier`(in inputSupid int)
+BEGIN
+SELECT PSUP.prod-id,PSUP.supp-id,PSUP.date,PSUP.price,S.namesup,P.nameprod FROM productsupplier PSUP,product P,supplier S
+WHERE PSUP.prod-id=p.id and PSUP.supp-id=S.id and PSUP.supp-id=inputSupid;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `ProductsBetweenPrices` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `ProductsBetweenPrices` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ProductsBetweenPrices`(in fristprice decimal(10,2),lastprice decimal(10,2))
+BEGIN
+select PROD.id,PROD.nameprod,INV.id,INV.nameinv, INVPROD.dateinvprod,INVPROD.priceunite,INVPROD.qt,SUP.id,SUP.namesup
+ from product PROD,invoice INV,supplier SUP,invoiceproduct INVPROD,Productsupplier PRODSUP
+  where INVPROD.product-id=PROD.id and INVPROD.invoice-id=INV.id and PROSUP.supp-id=SUP.id and PROSUP.prod-id=PROD.id
+           and INVPROD.priceunite between fristprice and lastprice;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `QuantityProductinStockareMin` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `QuantityProductinStockareMin` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `QuantityProductinStockareMin`()
+BEGIN
+		SELECT SP.product-id, SP.stock-id, P.nameprod,S.namestck, SP.qt, SP.flagminqt 
+		FROM product P, stock S, stockproduct SP 
+		WHERE S.id=SP.stock-id and SP.product-id = P.id AND Sp.flaqminqt='m';
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `SearchBetweenDateProductinRoom` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `SearchBetweenDateProductinRoom` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SearchBetweenDateProductinRoom`(IN firstdate DATETIME,lastdate DATETIME)
+BEGIN
+SELECT PR.product-id, PR.room-id, P.nameprod,R.nameroom, PR.date FROM product P, room R, productroom PR 
+           WHERE p.id=PR.product-id AND R.id=PR.room-id AND PR.date BETWEEN firstdate AND lastdate;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `SearchBranch` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `SearchBranch` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SearchBranch`(IN Searchnameb VARCHAR (50))
+BEGIN
+		SELECT * FROM branches WHERE upper(nameb) like concat('%',upper(Searchnameb),'%');
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `SearchCategorie` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `SearchCategorie` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SearchCategorie`(in searchnamec varchar (50), searchidc int)
+BEGIN
+SELECT * FROM Categorie WHERE namec=searchnamec or id=searchidc;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `SearchCity` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `SearchCity` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SearchCity`(IN searchnamecit VARCHAR(50), searchidcit INT)
+BEGIN
+SELECT * FROM cities WHERE namecit=searchnamecit OR id=searchidcit;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `Searchdepartment` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `Searchdepartment` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Searchdepartment`(IN searchnamedep VARCHAR(50), searchiddep INT)
+BEGIN
+SELECT * FROM department WHERE namedep=searchnamedep OR id=searchiddep;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `SearchEmployee` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `SearchEmployee` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SearchEmployee`(in searchnameemp varchar(50), searchidemp int)
+BEGIN
+select * from employee where nameemp=searchnameemp or id=searchidemp;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `SearchEmployeetype` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `SearchEmployeetype` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SearchEmployeetype`(in searchnameemptype varchar (50), searchidemptype int)
+BEGIN
+select * from employeetype where nametype=searchnameemptype or id=searchidemptype;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `SearchInvoice` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `SearchInvoice` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SearchInvoice`(in searchnameinv varchar(50),searchidinv int(20))
+BEGIN
+select * from invoice where nameinv=searchnameinv or id=searchidiv;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `SearchLocation` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `SearchLocation` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SearchLocation`(in searchnameloc varchar(50), searchidloc int)
+BEGIN
+select * from location where nameloc=searchnameloc or id=searchidloc;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `SearchProduct` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `SearchProduct` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SearchProduct`(in searchnameprod varchar(50), searchidprod int)
+BEGIN
+select * from product where nameprod=searchnameprod or id=searchidprod;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `SearchRoom` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `SearchRoom` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SearchRoom`(in searchnameroom varchar(50),searchidroom int)
+BEGIN
+select * from room where nameroom=searchnameroom or id=searchidroom;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `SearchStock` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `SearchStock` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SearchStock`(in searchnamestck varchar(50),searchidstck int)
+BEGIN
+select * from stock where namestck=searchnamestck or id=searchidstck;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `SearchSupplier` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `SearchSupplier` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SearchSupplier`(in searchnamesup varchar(50), searchidsup int)
+BEGIN
+select * from supplier where namesup=searchnamesup or id=searchidsup;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `SearchUser` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `SearchUser` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SearchUser`(in searchusername varchar(50),searchiduser int)
+BEGIN
+select * from users where username=searchusername or id=searchiduser;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `SearchVehicle` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `SearchVehicle` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SearchVehicle`(in searchnameveh varchar(50), searchidveh int)
+BEGIN
+select * from vehicle where nameveh=searchnameveh or id=searchidveh;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `UpadetSupplier` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `UpadetSupplier` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpadetSupplier`(in idsupupdate int,namesupupdate varchar(50),phonesupupdate int(20),adresssupupdate varchar(80), emailsupupdate varchar(20))
+BEGIN
+UPDATE supplier SET namesup = namesupupdate AND phone=phonesupupdate and adress= adresssupupdate and email= emailsupupdate WHERE id=idsupupdate; 
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `UpdateBranch` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `UpdateBranch` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateBranch`(in idbrchupdate int, namebrchupdate varchar(50), phonebrchupdate varchar(20), locationUpdate int)
+BEGIN
+	update branches 
+	set nameb = namebrchupdate,phone=phonebrchupdate,location_id = locationUpdate
+	where id=idbrchupdate; 
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `UpdateCategorie` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `UpdateCategorie` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateCategorie`(IN idcatupdate INT,namecatupdate VARCHAR(50), descatupdate varchar(120))
+BEGIN
+UPDATE categorie SET namec = namecatupdate AND des=descatupdate WHERE id=idcatupdate; 
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `Updatecities` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `Updatecities` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Updatecities`(IN idcitupdate INT,namecitupdate VARCHAR(50) )
+BEGIN
+UPDATE cities SET namecit = namecitupdate WHERE id=idcitupdate;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `UpdateDepartment` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `UpdateDepartment` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateDepartment`(IN iddepupdate INT,namedepupdate VARCHAR(50), phonedepupdate INT(20))
+BEGIN
+UPDATE department SET namedep = namedepupdate AND phone=phonrdepupdate WHERE id=iddepupdate;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `UpdateEmployee` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `UpdateEmployee` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateEmployee`(in idempupdate int,nameempupdate varchar(50),adressempupdate varchar(80),phoneempupdate int(20),emailempupdate varchar(20))
+BEGIN
+UPDATE employee SET nameemp = nameempupdate AND adress=adressempupdate and phone=phoneempupdate and email=emailempupdate WHERE id=idempupdate; 
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `UpdateEmployeetype` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `UpdateEmployeetype` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateEmployeetype`(IN idemptypeupdate INT,nameemptypeupdate VARCHAR(50), descemptypeupdate varchar(120))
+BEGIN
+UPDATE employeetype SET nametype = nameemptypepdate AND desctype = desdemptypeupdate WHERE id=idemptypeupdate; 
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `UpdateInvoice` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `UpdateInvoice` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateInvoice`(IN idinvupdate INT,nameinvupdate VARCHAR(50), dateinvupdate datetime)
+BEGIN
+UPDATE invoice SET nameinv = nameinvupdate AND dateinv=dateinvupdate WHERE id=idinvupdate; 
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `UpdateLocation` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `UpdateLocation` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateLocation`(IN idupdate INT,namelocupdate VARCHAR(50))
+BEGIN
+UPDATE location SET nameloc = namelocupdate WHERE id=idupdate;
+END */$$
+
+DELIMITER ;
+
+/* Procedure structure for procedure `UpdateProduct` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `UpdateProduct` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateProduct`(IN idprodupdate INT,nameprodupdate VARCHAR(50))
+BEGIN
+UPDATE product SET nameprod = nameprodupdate WHERE id=idprodpdate; 
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `updateRoom` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `updateRoom` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateRoom`(IN idroomupdate INT,nameroomupdate VARCHAR(50), phoneroomupdate INT(20))
+BEGIN
+UPDATE room SET nameroom = nameroomupdate AND phone=phoneroomupdate WHERE id=idroomupdate; 
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `UpdateUsersPassword` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `UpdateUsersPassword` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateUsersPassword`(IN usernameupdate VARCHAR(20), userpassupdate VARCHAR(20))
+BEGIN
+UPDATE users SET userpass=userpassupdate WHERE username=usernameupdate;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `UpdateUsersValid` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `UpdateUsersValid` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateUsersValid`(IN usernameupdate VARCHAR(20), validupdate VARCHAR(1))
+BEGIN
+UPDATE users SET valid=validupdate WHERE username=usernameupdate;
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `UpdateVehicle` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `UpdateVehicle` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateVehicle`(IN idvehupdate INT,namevehupdate VARCHAR(50))
+BEGIN
+UPDATE vehicle SET nameveh = namevehupdate WHERE id=idvehupdate; 
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `VehiclesDriveByEmployeeBetweenDate` */
+
+DELIMITER $$
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS  `VehiclesDriveByEmployeeBetweenDate` $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `VehiclesDriveByEmployeeBetweenDate`(IN EmployeeidSearch INT,firstdatedriv DATETIME,lastdatedrive DATETIME)
+BEGIN
+SELECT VEH.id,VEH.nameveh,EMP.id,EMP.nameemp,EMP,adress,EMP.phone,EMP.email,DRIV.datedriv 
+      FROM vehicle VEH,employee EMP,driving DRIV
+        WHERE DRIV.Vehicle-id=VEH.id AND DRIV.employee-id=EMP.id 
+              AND DRIV.employee-id=EmployeeidSearch AND DRIV.datedriv BETWEEN firstdatedriv AND lastdatedrive;
+END */$$
+DELIMITER ;
