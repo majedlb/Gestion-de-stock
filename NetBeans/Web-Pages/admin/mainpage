@@ -1,0 +1,35 @@
+<%@page import="entities.User"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Admin Page</title>
+    </head>
+    <body>
+        <h1>Welcome <%out.println(((User) session.getAttribute("user")).getUsername());%>!</h1>
+        <table border="0" cellpadding="2">
+            <tbody>
+                <tr>
+                    <td><input type="submit" value="Manage Users" name="manageUsers" onclick="location.href='manageUsers.jsp';"/></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Manage Products" name="manageProducts" /></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="option 3" /></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="option 4" /></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="option 5" /></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="option 6" /></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </body>
+</html>
