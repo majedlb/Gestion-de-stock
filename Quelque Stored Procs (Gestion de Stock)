@@ -1122,3 +1122,63 @@ SELECT VEH.id,VEH.nameveh,EMP.id,EMP.nameemp,EMP,adress,EMP.phone,EMP.email,DRIV
               AND DRIV.employee-id=EmployeeidSearch AND DRIV.datedriv BETWEEN firstdatedriv AND lastdatedrive;
 END */$$
 DELIMITER ;
+
+/* Procedure structure for procedure `getUserInf` */
+
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS `getUserInfo`$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getUserInfo`(IN searchusername VARCHAR(50))
+BEGIN
+	SELECT * FROM users WHERE UPPER(username) = UPPER(searchusername);
+END$$
+
+DELIMITER ;
+
+/* Procedure structure for procedure `getUserInfobyID` */
+
+DELIMITER $$
+
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS `getUserInfobyID`$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getUserInfobyID`(IN searchid INT)
+BEGIN
+	SELECT * FROM users WHERE `id` = searchid;
+END$$
+
+DELIMITER ;
+
+/* Procedure structure for procedure `loginUser` */
+
+DELIMITER $$
+
+USE `stocks`$$
+
+DROP PROCEDURE IF EXISTS `loginUser`$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `loginUser`(IN uname VARCHAR(20),IN pass VARCHAR(20),OUT S_RESULT INT)
+BEGIN
+	#return 0 if wrong password
+	#return userLevel value if correct password
+	#return -1 if user doesn't exist
+	DECLARE db_Password  VARCHAR(20);
+	DECLARE db_count INTEGER;
+	SELECT COUNT(*) INTO db_count FROM `users` WHERE `username`=uname;
+	
+	IF db_count = 1 THEN 
+		SELECT `userpass` INTO db_Password FROM `users` WHERE `username`=uname;		
+		IF db_Password=pass THEN
+			SELECT 1 INTO S_RESULT;
+		ELSE 
+			SELECT 0 INTO S_RESULT;
+		END IF;
+	ELSE
+		SELECT 0 INTO S_RESULT;
+	END IF;
+	
+END$$
+
+DELIMITER ;
