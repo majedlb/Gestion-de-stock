@@ -1,0 +1,1284 @@
+package entities;
+
+public class Branch {
+    long id;
+    String name,phone;
+    long location;
+
+    public Branch() {
+    }
+
+    public Branch(long id, String name, String phone, long location) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.location = location;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public long getLocation() {
+        return location;
+    }
+
+    public void setLocation(long location) {
+        this.location = location;
+    }
+
+    @Override
+    public String toString() {
+        return "Branch{" + "id=" + id + ", name=" + name + ", phone=" + phone + ", location=" + location + '}';
+    }
+    
+    
+    
+    
+}
+
+
+
+package entities;
+public class Categorie {
+long id;
+String name,desc;
+
+    public Categorie() {
+    }
+
+    public Categorie(long id, String name, String desc) {
+        this.id = id;
+        this.name = name;
+        this.desc = desc;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    @Override
+    public String toString() {
+        return "Categorie{" + "id=" + id + ", name=" + name + ", desc=" + desc + '}';
+    }
+
+   
+    
+
+    
+
+}
+
+
+
+package entities;
+
+public class City {
+    int id;
+    String name;
+
+    public City() {
+    }
+
+    public City(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "City{" + "id=" + id + ", name=" + name + '}';
+    }
+    
+    
+    
+}
+
+
+
+package entities;
+
+public class Department {
+    
+    long id;
+    String name;
+    String phone;
+    long branch_id;
+
+    public Department() {
+    }
+
+    public Department(long id, String name, String Phone, long branch_id) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.branch_id = branch_id;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String Phone) {
+        this.phone = phone;
+    }
+
+    public long getBranch_id() {
+        return branch_id;
+    }
+
+    public void setBranch_id(long branch_id) {
+        this.branch_id = branch_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Departmenmt{" + "id=" + id + ", name=" + name + ", phone=" + phone + ", branch_id=" + branch_id + '}';
+    }
+    
+    
+}
+
+
+
+package entities;
+
+public class Driving {
+
+    long vehicule_id;
+    long employee_id;
+    String date;
+    String desc;
+
+    public Driving() {
+    }
+
+    public Driving(long vehicule_id, long employee_id, String date, String desc) {
+        this.vehicule_id = vehicule_id;
+        this.employee_id = employee_id;
+        this.date = date;
+        this.desc = desc;
+    }
+
+    public long getVehicule_id() {
+        return vehicule_id;
+    }
+
+    public void setVehicule_id(long vehicule_id) {
+        this.vehicule_id = vehicule_id;
+    }
+
+    public long getEmployee_id() {
+        return employee_id;
+    }
+
+    public void setEmployee_id(long employee_id) {
+        this.employee_id = employee_id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    @Override
+    public String toString() {
+        return "Driving{" + "vehicule_id=" + vehicule_id + ", employee_id=" + employee_id + ", date=" + date + ", desc=" + desc + '}';
+    }
+    
+    
+}
+
+
+
+package entities;
+
+public class Employee {
+ 
+    long id;
+    String name;
+    String adress;
+    String phone;
+    String email;
+    long room_id;
+    long employee_type_id;
+    long branch_id;
+    long department_id;
+    long stock_id;
+
+    public Employee() {
+    }
+
+    public Employee(long id, String name, String adress, String phone, String email, long room_id, long employee_type_id, long branch_id, long department_id, long stock_id) {
+        this.id = id;
+        this.name = name;
+        this.adress = adress;
+        this.phone = phone;
+        this.email = email;
+        this.room_id = room_id;
+        this.employee_type_id = employee_type_id;
+        this.branch_id = branch_id;
+        this.department_id = department_id;
+        this.stock_id = stock_id;   
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public long getRoom_id() {
+        return room_id;
+    }
+
+    public void setRoom_id(long room_id) {
+        this.room_id = room_id;
+    }
+
+    public long getEmployee_type_id() {
+        return employee_type_id;
+    }
+
+    public void setEmployee_type_id(long employee_type_id) {
+        this.employee_type_id = employee_type_id;
+    }
+
+    public long getBranch_id() {
+        return branch_id;
+    }
+
+    public void setBranch_id(long branch_id) {
+        this.branch_id = branch_id;
+    }
+
+    public long getDepartment_id() {
+        return department_id;
+    }
+
+    public void setDepartment_id(long department_id) {
+        this.department_id = department_id;
+    }
+
+    public long getStock_id() {
+        return stock_id;
+    }
+
+    public void setStock_id(long stock_id) {
+        this.stock_id = stock_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" + "id=" + id + ", name=" + name + ", adress=" + adress + ", phone=" + phone + ", email=" + email + ", room_id=" + room_id + ", employee_type_id=" + employee_type_id + ", branch_id=" + branch_id + ", department_id=" + department_id + ", stock_id=" + stock_id + '}';
+    }
+    
+    
+    
+}
+
+
+
+package entities;
+
+public class EmployeeType {
+
+    long id;
+    String name_type;
+    String desc_type;
+
+    public EmployeeType() {
+    }
+
+    public EmployeeType(long id, String name_type, String desc_type) {
+        this.id = id;
+        this.name_type = name_type;
+        this.desc_type = desc_type;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName_type() {
+        return name_type;
+    }
+
+    public void setName_type(String name_type) {
+        this.name_type = name_type;
+    }
+
+    public String getDesc_type() {
+        return desc_type;
+    }
+
+    public void setDesc_type(String desc_type) {
+        this.desc_type = desc_type;
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeeType{" + "id=" + id + ", name_type=" + name_type + ", desc_type=" + desc_type + '}';
+    }
+    
+    
+}
+
+
+
+package entities;
+
+public class Invoice {
+
+    long id;
+    String name;
+    String date;
+    long disc;
+    long stock_id;
+    long supplier_id;
+
+    public Invoice() {
+    }
+
+    public Invoice(long id, String name, String date, long disc, long stock_id, long supplier_id) {
+        this.id = id;
+        this.name = name;
+        this.date = date;
+        this.disc = disc;
+        this.stock_id = stock_id;
+        this.supplier_id = supplier_id;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public long getDisc() {
+        return disc;
+    }
+
+    public void setDisc(long disc) {
+        this.disc = disc;
+    }
+
+    public long getStock_id() {
+        return stock_id;
+    }
+
+    public void setStock_id(long stock_id) {
+        this.stock_id = stock_id;
+    }
+
+    public long getSupplier_id() {
+        return supplier_id;
+    }
+
+    public void setSupplier_id(long supplier_id) {
+        this.supplier_id = supplier_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Invoice{" + "id=" + id + ", name=" + name + ", date=" + date + ", disc=" + disc + ", stock_id=" + stock_id + ", supplier_id=" + supplier_id + '}';
+    }
+    
+    
+}
+
+
+
+package entities;
+
+public class InvoiceProduct {
+long product_id;
+long invoice_id;
+String date;
+long priceunite;
+long qt;
+long disc;
+
+    public InvoiceProduct() {
+    }
+
+    public InvoiceProduct(long product_id, long invoice_id, String date, long priceunite, long qt, long disc) {
+        this.product_id = product_id;
+        this.invoice_id = invoice_id;
+        this.date = date;
+        this.priceunite = priceunite;
+        this.qt = qt;
+        this.disc = disc;
+    }
+
+    public long getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(long product_id) {
+        this.product_id = product_id;
+    }
+
+    public long getInvoice_id() {
+        return invoice_id;
+    }
+
+    public void setInvoice_id(long invoice_id) {
+        this.invoice_id = invoice_id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public long getPriceunite() {
+        return priceunite;
+    }
+
+    public void setPriceunite(long priceunite) {
+        this.priceunite = priceunite;
+    }
+
+    public long getQt() {
+        return qt;
+    }
+
+    public void setQt(long qt) {
+        this.qt = qt;
+    }
+
+    public long getDisc() {
+        return disc;
+    }
+
+    public void setDisc(long disc) {
+        this.disc = disc;
+    }
+
+    @Override
+    public String toString() {
+        return "InvoiceProduct{" + "product_id=" + product_id + ", invoice_id=" + invoice_id + ", date=" + date + ", priceunite=" + priceunite + ", qt=" + qt + ", disc=" + disc + '}';
+    }
+ 
+}
+
+
+
+package entities;
+
+public class Location {
+
+    long id;
+    String name;
+    long city_id;
+
+    public Location() {
+    }
+
+    public Location(long id, String name, long city_id) {
+        this.id = id;
+        this.name = name;
+        this.city_id = city_id;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public long getCity_id() {
+        return city_id;
+    }
+
+    public void setCity_id(long city_id) {
+        this.city_id = city_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" + "id=" + id + ", name=" + name + ", city_id=" + city_id + '}';
+    }
+    
+    
+}
+
+
+
+package entities;
+
+public class Product {
+long id;
+String name;
+long categorie_id;
+
+    public Product() {
+    }
+
+    public Product(long id, String name, long categorie_id) {
+        this.id = id;
+        this.name = name;
+        this.categorie_id = categorie_id;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public long getCategorie_id() {
+        return categorie_id;
+    }
+
+    public void setCategorie_id(long categorie_id) {
+        this.categorie_id = categorie_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" + "id=" + id + ", name=" + name + ", categorie_id=" + categorie_id + '}';
+    }
+
+}
+
+
+
+package entities;
+
+public class ProductRoom {
+    long product_id;
+    long room_id;
+    String date;
+    long qt;
+
+    public ProductRoom() {
+    }
+
+    public ProductRoom(long product_id, long room_id, String date, long qt) {
+        this.product_id = product_id;
+        this.room_id = room_id;
+        this.date = date;
+        this.qt = qt;
+    }
+
+    public long getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(long product_id) {
+        this.product_id = product_id;
+    }
+
+    public long getRoom_id() {
+        return room_id;
+    }
+
+    public void setRoom_id(long room_id) {
+        this.room_id = room_id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public long getQt() {
+        return qt;
+    }
+
+    public void setQt(long qt) {
+        this.qt = qt;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductRoom{" + "product_id=" + product_id + ", room_id=" + room_id + ", date=" + date + ", qt=" + qt + '}';
+    }
+
+    
+}
+
+
+
+package entities;
+public class ProductSupplier {
+    
+    long product_id;
+    long supplier_id;
+    String date;
+    long price_unite;
+
+    public ProductSupplier() {
+    }
+
+    public ProductSupplier(long product_id, long supplier_id, String date, long price_unite) {
+        this.product_id = product_id;
+        this.supplier_id = supplier_id;
+        this.date = date;
+        this.price_unite = price_unite;
+    }
+
+    public long getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(long product_id) {
+        this.product_id = product_id;
+    }
+
+    public long getSupplier_id() {
+        return supplier_id;
+    }
+
+    public void setSupplier_id(long supplier_id) {
+        this.supplier_id = supplier_id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public long getPrice_unite() {
+        return price_unite;
+    }
+
+    public void setPrice_unite(long price_unite) {
+        this.price_unite = price_unite;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductSupplier{" + "product_id=" + product_id + ", supplier_id=" + supplier_id + ", date=" + date + ", price_unite=" + price_unite + '}';
+    }
+    
+}
+
+
+
+package entities;
+
+public class Room {
+
+    long id;
+    String name;
+    String phone;
+    long department_id;
+
+    public Room() {
+    }
+
+    public Room(long id, String name, String phone, long department_id) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.department_id = department_id;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public long getDepartment_id() {
+        return department_id;
+    }
+
+    public void setDepartment_id(long department_id) {
+        this.department_id = department_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" + "id=" + id + ", name=" + name + ", phone=" + phone + ", department_id=" + department_id + '}';
+    }
+    
+    
+}
+
+
+
+package entities;
+
+public class Stock {
+
+    long id;
+    String name;
+    String phone;
+    long branch_id;
+
+    public Stock() {
+    }
+
+    public Stock(long id, String name, String phone, long branch_id) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.branch_id = branch_id;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public long getBranch_id() {
+        return branch_id;
+    }
+
+    public void setBranch_id(long branch_id) {
+        this.branch_id = branch_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Stock{" + "id=" + id + ", name=" + name + ", phone=" + phone + ", branch_id=" + branch_id + '}';
+    }
+    
+    
+            
+}
+
+
+
+package entities;
+
+public class StockProduct {
+
+    long stock_id;
+    long product_id;
+    String date;
+    long qt;
+    String flag_min_qt;
+
+    public StockProduct() {
+    }
+
+    public StockProduct(long stock_id, long product_id, String date, long qt, String flag_min_qt) {
+        this.stock_id = stock_id;
+        this.product_id = product_id;
+        this.date = date;
+        this.qt = qt;
+        this.flag_min_qt = flag_min_qt;
+    }
+
+    public long getStock_id() {
+        return stock_id;
+    }
+
+    public void setStock_id(long stock_id) {
+        this.stock_id = stock_id;
+    }
+
+    public long getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(long product_id) {
+        this.product_id = product_id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public long getQt() {
+        return qt;
+    }
+
+    public void setQt(long qt) {
+        this.qt = qt;
+    }
+
+    public String getFlag_min_qt() {
+        return flag_min_qt;
+    }
+
+    public void setFlag_min_qt(String flag_min_qt) {
+        this.flag_min_qt = flag_min_qt;
+    }
+
+    @Override
+    public String toString() {
+        return "StockProduct{" + "stock_id=" + stock_id + ", product_id=" + product_id + ", date=" + date + ", qt=" + qt + ", flag_min_qt=" + flag_min_qt + '}';
+    }
+    
+    
+}
+
+
+
+package entities;
+
+public class Supplier {
+
+    long id;
+    String name;
+    String phone;
+    String adress;
+    String email;
+
+    public Supplier() {
+    }
+
+    public Supplier(long id, String name, String phone, String adress, String email) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.adress = adress;
+        this.email = email;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Supplier{" + "id=" + id + ", name=" + name + ", phone=" + phone + ", adress=" + adress + ", email=" + email + '}';
+    }
+    
+    
+}
+
+
+
+package entities;
+
+public class Transfer {
+
+    long stock_id;
+    long vehicule_id;
+    long product_id;
+    String date;
+    long qt;
+
+    public Transfer() {
+    }
+
+    public Transfer(long stock_id, long vehicule_id, long product_id, String date, long qt) {
+        this.stock_id = stock_id;
+        this.vehicule_id = vehicule_id;
+        this.product_id = product_id;
+        this.date = date;
+        this.qt = qt;
+    }
+
+    public long getStock_id() {
+        return stock_id;
+    }
+
+    public void setStock_id(long stock_id) {
+        this.stock_id = stock_id;
+    }
+
+    public long getVehicule_id() {
+        return vehicule_id;
+    }
+
+    public void setVehicule_id(long vehicule_id) {
+        this.vehicule_id = vehicule_id;
+    }
+
+    public long getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(long product_id) {
+        this.product_id = product_id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public long getQt() {
+        return qt;
+    }
+
+    public void setQt(long qt) {
+        this.qt = qt;
+    }
+
+    @Override
+    public String toString() {
+        return "Transfer{" + "stock_id=" + stock_id + ", vehicule_id=" + vehicule_id + ", product_id=" + product_id + ", date=" + date + ", qt=" + qt + '}';
+    }
+    
+    
+            
+}
+
+
+
+package entities;
+
+public class User {
+
+    long id;
+    String username;
+    String userpass;
+    String valid;
+    long employee_id;
+
+    public User() {
+    }
+
+    public User(long id, String username, String userpass, String valid, long employee_id) {
+        this.id = id;
+        this.username = username;
+        this.userpass = userpass;
+        this.valid = valid;
+        this.employee_id = employee_id;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUserpass() {
+        return userpass;
+    }
+
+    public void setUserpass(String userpass) {
+        this.userpass = userpass;
+    }
+
+    public String getValid() {
+        return valid;
+    }
+
+    public void setValid(String valid) {
+        this.valid = valid;
+    }
+
+    public long getEmployee_id() {
+        return employee_id;
+    }
+
+    public void setEmployee_id(long employee_id) {
+        this.employee_id = employee_id;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", username=" + username + ", userpass=" + userpass + ", valid=" + valid + ", employee_id=" + employee_id + '}';
+    }
+    
+    
+}
+
+
+
+package entities;
+
+public class Vehicule {
+
+    long id;
+    String name;
+    long stock_id;
+
+    public Vehicule() {
+    }
+
+    public Vehicule(long id, String name, long stock_id) {
+        this.id = id;
+        this.name = name;
+        this.stock_id = stock_id;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public long getStock_id() {
+        return stock_id;
+    }
+
+    public void setStock_id(long stock_id) {
+        this.stock_id = stock_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Vehicule{" + "id=" + id + ", name=" + name + ", stock_id=" + stock_id + '}';
+    }
+    
+    
+}
