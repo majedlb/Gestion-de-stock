@@ -1,0 +1,77 @@
+<%@page import="entities.User"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="database.UserManipulations"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script language="javascript" type="text/javascript" src="../JS/jquery-1.11.0.min.js"></script>
+        <title>Manage Users</title>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".butt").click(function () {
+                    var id_value = event.target.id;
+                    //calling another page from within the same page
+                    $.ajax({
+                        //call page Manipulation ersal variable howa action & userid
+                        url: '../manipulations/users.jsp?action=deleteUser&userID=' + id_value,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        type: 'POST',// ta7did tari2et el call post aw get
+                        success: function (data) {
+                            console.log("Returned from ajax : " + data);
+                            var json = $.parseJSON(data);
+                            if (json.code == 1) {
+                                alert('user deleted');
+                            } else {
+                                alert('Error : ' + json.description);
+                            }
+                        },
+                        complete: function () {                            
+                        }
+                    });
+                });
+                
+            });
+        </script>
+    </head>
+    <body>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Type</th>
+                    <th>Employee ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%
+                    //SearchUser(""); : list all users
+                    ArrayList<User> list = UserManipulations.SearchUser("");
+                    for (User u : list) {
+                        out.println("<tr>");
+                        out.println("<td>" + u.getId() + "</td>");
+                        out.println("<td>" + u.getUsername() + "</td>");
+                        out.println("<td>" + u.getUserpass() + "</td>");
+                        out.println("<td>" + u.getValid() + "</td>");
+                        out.println("<td>" + u.getEmployee_id() + "</td>");
+                        out.println("<td>" + "<button class=\"butt\"  id=\"" + u.getId() + "\">Delete</button>" + "</td>");
+                        out.println("</tr>");
+                    }
+                    out.println("</tbody>");
+                    out.println("</table>");
+                %>
+                <table border="0" cellpadding="2">
+                <tbody>
+                    <tr>
+                    <td><input type="submit" value="Add New Users" name="BtnAddNewUsers" onclick="location.href='AddNewUser.jsp';"/></td>
+                    </tr>
+                
+                </tbody>
+                </table>
+    </body>
+</html>
