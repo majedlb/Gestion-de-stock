@@ -12,14 +12,14 @@
             $(document).ready(function () {
                 $(".butt").click(function () {
                     var id_value = event.target.id;
-                    //calling another page from within the same page
+                    //*1*
                     $.ajax({
-                        //call page Manipulation ersal variable howa action & userid
+                        //*2*
                         url: '../manipulations/users.jsp?action=deleteUser&userID=' + id_value,
                         cache: false,
                         contentType: false,
                         processData: false,
-                        type: 'POST',// ta7did tari2et el call post aw get
+                        type: 'POST',// *3*
                         success: function (data) {
                             console.log("Returned from ajax : " + data);
                             var json = $.parseJSON(data);
