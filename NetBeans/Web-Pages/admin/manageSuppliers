@@ -20,7 +20,7 @@
                         cache: false,
                         contentType: false,
                         processData: false,
-                        type: 'POST', // Type of call (“POST” or “GET”) and obtain message “supplier addet” or message “Error”
+                        type: 'POST', // obtain message “supplier addet” or message “Error”
                         success: function (data) {
                             console.log("Returned from ajax : " + data);
                             var json = $.parseJSON(data);
@@ -45,7 +45,7 @@
 //                        cache: false,
 //                        contentType: false,
 //                        processData: false,
-//                        type: 'POST', // Type of call (“POST” or “GET”) and obtain message “supplier deleted” or message “Error”
+//                        type: 'POST', // obtain message “supplier deleted” or message “Error”
 //                        success: function (data) {
 //                            console.log("Returned from ajax : " + data);
 //                            var json = $.parseJSON(data);
