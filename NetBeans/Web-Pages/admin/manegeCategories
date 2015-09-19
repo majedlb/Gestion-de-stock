@@ -1,0 +1,108 @@
+<%@page import="entities.Categorie"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="database.CategorieManipulations"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script language="javascript" type="text/javascript" src="../JS/jquery-1.11.0.min.js"></script>
+        <title>Manage Categories</title>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#btnAddCategorie").click(function () {
+                    var namecategorie = $("#NameNew").val();
+                    var desccategorie = $("#DescriptionNew").val();
+// calling another page from within the same page(operator Cannot watch them because it’s only for programmer    
+                    $.ajax({
+                        //call page Manipulation /categorie.jsp “where if = add
+                        url: '../manipulations/categories.jsp?action=addCategorie&categoriename='+namecategorie+'&categoriedesc='+desccategorie, 
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        type: 'POST', // Type of call (“POST” or “GET”) and obtain message “supplier addet” or message “Error”
+                        success: function (data) {
+                            console.log("Returned from ajax : " + data);
+                            var json = $.parseJSON(data);
+                            if (json.code == 1) {
+                                alert('categorie addet');
+                            } else {
+                                alert('Error : ' + json.description);
+                            }
+                        },
+                        complete: function () {
+                        }
+                    });
+                });
+                $("#divAddNewCategorie").hide();
+                $("#addNewCategorie").click(function () {
+                    $("#divAddNewCategorie").show();
+                });
+//               $(".butDel").click(function () {
+//                    var id_value = event.target.id;
+//                    // calling another page from within the same page(operator Cannot watch them because it’s only for programmer 
+//                   $.ajax({
+//  //call page Manipulation /categories.jsp “where if = delete
+//                       *************
+//                    });
+//                });
+
+            });
+        </script>
+    </head>
+    <body>
+        <h4>Notes: Stock/web/admin/manageCategories.jsp</h4>
+        <h1>Manage Categories</h1>
+       <h1>Categories List</h1>
+       <table border=”1”>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%
+                    //SearchUser(""); : list all Categorie
+                    ArrayList<Categorie> list = CategorieManipulations.SearchCategorie ("");
+                    for (Categorie Catg : list) {
+                        out.println("<tr>");
+                        out.println("<td>" + Catg.getId() + "</td>");
+                        out.println("<td>" + Catg.getName() + "</td>");
+                        out.println("<td>" + Catg.getDesc() + "</td>");
+                        out.println("<td>" + "<button class=\"butDel\"  id=\"" + Catg.getId() + "\">Delete</button>" + "</td>");
+                        out.println("<td>" + "<button class=\"butEdit\"  id=\"" + Catg.getId() + "\">Edit</button>" + "</td>");
+                        out.println("</tr>");
+                    }
+                    out.println("</tbody>");
+                    out.println("</table>");
+                %>
+            </tbody>
+        </table>
+<!--add new CAtegorie-->
+       <input id="addNewCategorie" type="submit" value="Add New Categorie" />
+        <!--Creating the add new Categorie form-->
+        <div id="divAddNewCategorie">
+            <h1>Add Categorie</h1>
+            <table border="1">
+                <tr>
+                    <td>Name</td>
+                    <td><input id = "NameNew" type="text" name="txtNewCategorieName" value="" /></td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td><input id="DescriptionNew " type="text" name="txtNewCategorieDescription" value="" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                   <td><input id="btnAddCategorie" type="submit" value="Add Categorie" /></td>
+                </tr>
+            </table>
+        </div>
+<!--Edit Supplier-->
+        <div id="editCategorie">
+
+        </div>
+    </body>
+</html>
