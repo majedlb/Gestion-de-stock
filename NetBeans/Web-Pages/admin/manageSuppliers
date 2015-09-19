@@ -15,10 +15,8 @@
                     var telsupplier = $("#TelNew").val();
                     var addresssupplier = $("#AddressNew").val();
                     var emailsupplier = $("#EmailNew").val();
-// calling another page from within the same page(operator Cannot watch them because it’s only for programmer    
                     $.ajax({
-                        //call page Manipulation /suppliers.jsp “where if = add
-          url: '../manipulations/suppliers.jsp?action=addSupplier&suppliername='+namesupplier+'&suppliertel='+telsupplier+'&supplieraddress='+addresssupplier+'&supplieremail='+emailsupplier, 
+                    url: '../manipulations/suppliers.jsp?action=addSupplier&suppliername='+namesupplier+'&suppliertel='+telsupplier+'&supplieraddress='+addresssupplier+'&supplieremail='+emailsupplier, 
                         cache: false,
                         contentType: false,
                         processData: false,
@@ -42,10 +40,8 @@
                 });
 //               $(".butDel").click(function () {
 //                    var id_value = event.target.id;
-//                    // calling another page from within the same page(operator Cannot watch them because it’s only for programmer 
-//                   $.ajax({
-//  //call page Manipulation /suppliers.jsp “where if = delete
-//                        url: '../manipulations/suppliers.jsp?action= deleteSupplier&supplierID=' + id_value,
+//                    $.ajax({
+//                  url: '../manipulations/suppliers.jsp?action= deleteSupplier&supplierID=' + id_value,
 //                        cache: false,
 //                        contentType: false,
 //                        processData: false,
@@ -68,7 +64,6 @@
         </script>
     </head>
     <body>
-        <h4>Notes: Stock/web/admin/manageSuppliers.jsp</h4>
         <h1>Manage Suppliers</h1>
        <h1>Suppliers List</h1>
        <table border=”1”>
