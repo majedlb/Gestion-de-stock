@@ -14,14 +14,12 @@ page import="entities.User"%>
                     var username = $("#usernameNew").val();
                     var password = $("#passwordNew").val();
                     var type = $("#typeNew").val();
-// calling another page from within the same page(operator Cannot watch them because it’s only for programmer                
                     $.ajax({
-                        //call page Manipulation /suppliers.jsp “where if = add 
                         url: '../manipulations/users.jsp?action=addUser&username='+username+'&passwd='+password+'&type='+type,
                         cache: false,
                         contentType: false,
                         processData: false,
-                        type: 'POST', // Type of call (“POST” or “GET”) and obtain message “supplier addet” or message “Error”
+                        type: 'POST', //obtain message “supplier addet” or message “Error”
                         success: function (data) {
                             console.log("Returned from ajax : " + data);
                             var json = $.parseJSON(data);
@@ -41,14 +39,12 @@ page import="entities.User"%>
                 });
                 $(".butDel").click(function () {
                     var id_value = event.target.id;
-    // calling another page from within the same page(operator Cannot watch them because it’s only for programmer 
                     $.ajax({
-                    //call page Manipulation /suppliers.jsp “where if = delete
                         url: '../manipulations/users.jsp?action=deleteUser&userID=' + id_value,
                         cache: false,
                         contentType: false,
                         processData: false,
-                        type: 'POST', // Type of call (“POST” or “GET”) and obtain message “supplier deleted” or message “Error”
+                        type: 'POST', // obtain message “supplier deleted” or message “Error”
                         success: function (data) {
                             console.log("Returned from ajax : " + data);
                             var json = $.parseJSON(data);
@@ -67,7 +63,6 @@ page import="entities.User"%>
         </script>
     </head>
     <body>
-        <h4>Notes: Stock/web/admin/manageUsers.jsp</h4>
         <h1>Manage Users</h1>
         <h2> Users List</h2>
         <table border="1">
