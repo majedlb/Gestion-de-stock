@@ -13,14 +13,12 @@
                 $("#btnAddCategorie").click(function () {
                     var namecategorie = $("#NameNew").val();
                     var desccategorie = $("#DescriptionNew").val();
-// calling another page from within the same page(operator Cannot watch them because it’s only for programmer    
                     $.ajax({
-                        //call page Manipulation /categorie.jsp “where if = add
                         url: '../manipulations/categories.jsp?action=addCategorie&categoriename='+namecategorie+'&categoriedesc='+desccategorie, 
                         cache: false,
                         contentType: false,
                         processData: false,
-                        type: 'POST', // Type of call (“POST” or “GET”) and obtain message “supplier addet” or message “Error”
+                        type: 'POST', // obtain message “supplier addet” or message “Error”
                         success: function (data) {
                             console.log("Returned from ajax : " + data);
                             var json = $.parseJSON(data);
@@ -40,10 +38,8 @@
                 });
 //               $(".butDel").click(function () {
 //                    var id_value = event.target.id;
-//                    // calling another page from within the same page(operator Cannot watch them because it’s only for programmer 
-//                   $.ajax({
-//  //call page Manipulation /categories.jsp “where if = delete
-//                       *************
+//                    $.ajax({
+//                  *************
 //                    });
 //                });
 
@@ -51,7 +47,6 @@
         </script>
     </head>
     <body>
-        <h4>Notes: Stock/web/admin/manageCategories.jsp</h4>
         <h1>Manage Categories</h1>
        <h1>Categories List</h1>
        <table border=”1”>
