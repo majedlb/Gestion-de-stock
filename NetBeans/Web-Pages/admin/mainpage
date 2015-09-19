@@ -8,20 +8,23 @@
     </head>
     <body>
         <h1>Welcome <%out.println(((User) session.getAttribute("user")).getUsername());%>!</h1>
+        <h4>Notes: Stock/web/admin/mainPage.jsp</h4>
+        <h1>Main Page</h1>
         <table border="0" cellpadding="2">
             <tbody>
                 <tr>
                     <td><input type="submit" value="Manage Users" name="manageUsers" onclick="location.href='manageUsers.jsp';"/></td>
                 </tr>
                 <tr>
-                    <td><input type="submit" value="Manage Products" name="manageProducts" /></td>
+                    <td><input type="submit" value="Manage Suppliers" name="manageSuppliers" onclick="location.href='manageSuppliers.jsp';" /></td>
                 </tr>
                 <tr>
-                    <td><input type="submit" value="option 3" /></td>
+                    <td><input type="submit" value="Manage Categories" name="manageCategories" onclick="location.href='manageCategories.jsp';"  /></td>
                 </tr>
                 <tr>
-                    <td><input type="submit" value="option 4" /></td>
+                    <td><input type="submit" value="manage Products" ame="manageProducts"/></td>
                 </tr>
+                
                 <tr>
                     <td><input type="submit" value="option 5" /></td>
                 </tr>
