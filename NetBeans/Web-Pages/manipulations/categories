@@ -8,21 +8,20 @@
     if (request.getMethod().equals("POST")) {
         try {
             String action = request.getParameter("action");
-            //if (action.equals("deleteCategorie")) {
-            //**** 
-            //*****
-            //if (CategorieManipulations.deleteCategorieById(catg.getCategoriename())) {
-            //       resp.setCode(1);
-            //      resp.setDescription("Delete successful");
-            //  } else {
-            //     resp.setCode(0);
-            //    resp.setDescription("Delete failed");
-            //}
-            //   out.print(resp);
-          //  } else 
-        if (action.equals("addCategorie")) {
-                String cname = request.getParameter("categoriename");
-                String cdesc = request.getParameter("categoriedesc");
+            if (action.equals("deleteCategorie")) {
+            String categorieid=request.getParameter("categorieID");
+            Categorie catg=CategorieManipulations.getCategorieInfobyID(Integer.parseInt(categorieid));
+            if (CategorieManipulations.deleteCategorie(catg.getName())) {
+                   resp.setCode(1);
+                  resp.setDescription("Delete successful");
+              } else {
+                 resp.setCode(0);
+                 resp.setDescription("Delete failed");
+            }
+               out.print(resp);
+            } else if (action.equals("addCategorie")) {
+                String cname =request.getParameter("namecategorie");
+                String cdesc =request.getParameter("categoriedesc");
                 Categorie catg = new Categorie(0, cname, cdesc);
                 if (CategorieManipulations.addNewCategorie(catg)) {
                     resp.setCode(1);
