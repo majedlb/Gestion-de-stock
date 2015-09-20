@@ -1,5 +1,5 @@
-<%@page import="database. SupplierManipulations"%>
-<%@page import="entities. Supplier"%>
+<%@page import="database.SupplierManipulations"%>
+<%@page import="entities.Supplier"%>
 <%@page import="Classes.Response"%>
 <%@page trimDirectiveWhitespaces="true"%>
 <%@ page contentType="text/html"%>
@@ -9,9 +9,9 @@
         try {
             String action = request.getParameter("action");
             if (action.equals("deleteSupplier")) {
-            String suppid = request.getParameter("supplierid");
-            Supplier supp = SupplierManipulations.getSupplierInfobyID(Integer.parseInt(suppid));
-            if (SupplierManipulations. deleteSupplierById(supp.getSuppliername())) {
+             String suppid = request.getParameter("supplierid");
+             Supplier supp = SupplierManipulations.getSupplierInfobyID(Integer.parseInt(suppid));
+            if (SupplierManipulations.deleteSupplier(supp.getName())) {
                    resp.setCode(1);
                   resp.setDescription("Delete successful");
               } else {
@@ -19,7 +19,7 @@
                 resp.setDescription("Delete failed");
             }
                out.print(resp);
-            } else if (action.equals("addSupplier")) {
+       } else if (action.equals("addSupplier")) {
                 String suppname = request.getParameter("suppliername");
                 String supptel = request.getParameter("suppliertel");
                 String suppadress = request.getParameter("supplieraddress");
