@@ -71,10 +71,11 @@ public class BranchManipulations {
 package database;
 
 import entities.Categorie;
-import java.sql.SQLException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 
 public class CategorieManipulations {
@@ -85,7 +86,6 @@ public class CategorieManipulations {
         CallableStatement cStmt = conn.prepareCall("{call addNewCategorie(?,?)}");
         cStmt.setString(1, cat.getName());
         cStmt.setString(2, cat.getDesc());
-        
         ResultSet rset = cStmt.executeQuery();
         rset.next();
         boolean result = (rset.getInt(1) == 1);
@@ -107,6 +107,19 @@ public class CategorieManipulations {
         return result;
     }
  
+     //Delete
+    public static boolean deleteCategorie(String catgname) throws SQLException {
+        Connection conn = ConnectionManager.connectToMySQL();
+        CallableStatement cStmt = conn.prepareCall("{call deleteCategorie(?)}");
+        cStmt.setString(1, catgname);
+        ResultSet rset = cStmt.executeQuery();
+        rset.next();
+        boolean result = (rset.getInt(1) == 1);
+        conn.close();
+        return result;
+    }
+
+    
  //Update
     public static boolean UpdateCategorie(long oldcategorieId,Categorie newcategorie) throws SQLException {
         Connection conn = ConnectionManager.connectToMySQL();
@@ -121,10 +134,35 @@ public class CategorieManipulations {
         return result;
     }
     
-    //Delete
-    public static boolean deleteCategorieById(Categorie cat) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    //find a specific categorie "recherche d'un categorie fixe"
+    public static Categorie getCategorieInfo(String catgname) throws SQLException {
+        Categorie result = null;
+        Connection conn = ConnectionManager.connectToMySQL();
+        CallableStatement cStmt = conn.prepareCall("{call getCategorieInfo(?)}");
+        cStmt.setString(1, catgname);
+        ResultSet rset = cStmt.executeQuery();
+        while (rset.next()) {
+            result = new Categorie(rset.getInt(1), rset.getString(2), rset.getString(3));
+        }
+        conn.close();
+        return result;
     }
+    
+    //searchUser by ID
+    public static Categorie getCategorieInfobyID(int id) throws SQLException {
+        Categorie result = null;
+        Connection conn = ConnectionManager.connectToMySQL();
+        CallableStatement cStmt = conn.prepareCall("{call getCategorieInfobyID(?)}");
+        cStmt.setInt(1, id);
+        ResultSet rset = cStmt.executeQuery();
+        while (rset.next()) {
+            result = new Categorie(rset.getInt(1), rset.getString(2), rset.getString(3));
+        }
+        conn.close();
+        return result;
+    }
+   
+
 }
 
 
@@ -768,19 +806,19 @@ public class ProductManipulations {
         conn.close();
         return result;
     }
-        
+     
     //Delete
-        public static boolean deleteProductByid(long x) throws SQLException {
+    public static boolean deleteProduct(String name) throws SQLException {
         Connection conn = ConnectionManager.connectToMySQL();
-        CallableStatement cStmt = conn.prepareCall("{call deleteProductByid(?)}");
-        cStmt.setLong(1, x);
+        CallableStatement cStmt = conn.prepareCall("{call deleteProduct(?)}");
+        cStmt.setString(1, name);
         ResultSet rset = cStmt.executeQuery();
         rset.next();
         boolean result = (rset.getInt(1) == 1);
         conn.close();
         return result;
-    }
-        
+    }    
+            
     //Update
     public static boolean UpdateProduct(long oldProductId, Product newProduct) throws SQLException {
         Connection conn = ConnectionManager.connectToMySQL();
@@ -796,11 +834,11 @@ public class ProductManipulations {
     }
     
     //Search
-    public static ArrayList<Product> SearchProduct(String name) throws SQLException {
+    public static ArrayList<Product> SearchProduct(String productname) throws SQLException {
         ArrayList<Product> result = new ArrayList<Product>();
         Connection conn = ConnectionManager.connectToMySQL();
         CallableStatement cStmt = conn.prepareCall("{call SearchProduct(?)}");
-        cStmt.setString(1, name);
+        cStmt.setString(1, productname);
         ResultSet rset = cStmt.executeQuery();
         while (rset.next()) {
             result.add(new Product(rset.getLong(1), rset.getString(2), rset.getLong(3)));
@@ -808,6 +846,35 @@ public class ProductManipulations {
         conn.close();
         return result;
     }
+    
+    //find a specific user "recherche d'un user fixe"
+    public static Product getProductInfo(String name) throws SQLException {
+        Product result = null;
+        Connection conn = ConnectionManager.connectToMySQL();
+        CallableStatement cStmt = conn.prepareCall("{call getProductInfo(?)}");
+        cStmt.setString(1, name);
+        ResultSet rset = cStmt.executeQuery();
+        while (rset.next()) {
+            result = new Product(rset.getLong(1), rset.getString(2), rset.getLong(3));
+        }
+        conn.close();
+        return result;
+    }
+    
+    //searchUser by ID
+    public static Product getProductInfobyID(int id) throws SQLException {
+        Product result = null;
+        Connection conn = ConnectionManager.connectToMySQL();
+        CallableStatement cStmt = conn.prepareCall("{call getProductInfobyID(?)}");
+        cStmt.setInt(1, id);
+        ResultSet rset = cStmt.executeQuery();
+        while (rset.next()) {
+            result = new Product(rset.getLong(1), rset.getString(2), rset.getLong(3));
+        }
+        conn.close();
+        return result;
+    }
+    
        
 }
 
@@ -1211,17 +1278,30 @@ public class SupplierManipulations {
     }
 
     //Delete
-    public static boolean deleteSupplierById(long x) throws SQLException {
+    //public static boolean deleteSupplierById(long x) throws SQLException {
+    //    Connection conn = ConnectionManager.connectToMySQL();
+    //    CallableStatement cStmt = conn.prepareCall("{call deleteSupplierById(?)}");
+    //    cStmt.setLong(1, x);
+    //    ResultSet rset = cStmt.executeQuery();
+    //    rset.next();
+    //    boolean result = (rset.getInt(1) == 1);
+    //    conn.close();
+    //    return result;
+    //}
+    
+    //Delete
+    public static boolean deleteSupplier(String username) throws SQLException {
         Connection conn = ConnectionManager.connectToMySQL();
-        CallableStatement cStmt = conn.prepareCall("{call deleteSupplierById(?)}");
-        cStmt.setLong(1, x);
+        CallableStatement cStmt = conn.prepareCall("{call deleteSupplier(?)}");
+        cStmt.setString(1, username);
         ResultSet rset = cStmt.executeQuery();
         rset.next();
         boolean result = (rset.getInt(1) == 1);
         conn.close();
         return result;
     }
-
+    
+   
     //Update
     public static boolean UpdateSupplier(long oldsupId, Supplier newSupplier) throws SQLException {
         Connection conn = ConnectionManager.connectToMySQL();
@@ -1252,8 +1332,36 @@ public class SupplierManipulations {
         return result;
     }
     
-     
+   
+    //find a specific user "recherche d'un user fixe"
+    public static Supplier getSupplierInfo(String suppliername) throws SQLException {
+        Supplier result = null;
+        Connection conn = ConnectionManager.connectToMySQL();
+        CallableStatement cStmt = conn.prepareCall("{call getSupplierInfo(?)}");
+        cStmt.setString(1, suppliername);
+        ResultSet rset = cStmt.executeQuery();
+        while (rset.next()) {
+            result = new Supplier(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4), rset.getString(5));
+        }
+        conn.close();
+        return result;
+    }
     
+    //searchUser by ID
+    public static Supplier getSupplierInfobyID(int id) throws SQLException {
+        Supplier result = null;
+        Connection conn = ConnectionManager.connectToMySQL();
+        CallableStatement cStmt = conn.prepareCall("{call getSupplierInfobyID(?)}");
+        cStmt.setInt(1, id);
+        ResultSet rset = cStmt.executeQuery();
+        while (rset.next()) {
+            result = new Supplier(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4), rset.getString(5));
+        }
+        conn.close();
+        return result;
+    }
+    
+        
 }
 
 
@@ -1353,7 +1461,7 @@ public class UserManipulations {
     //Add
     public static boolean addNewUsers(User us) throws SQLException {
         Connection conn = ConnectionManager.connectToMySQL();
-        CallableStatement cStmt = conn.prepareCall("{call addNewUsers(?,?,?)}");
+        CallableStatement cStmt = conn.prepareCall("{call addNewUsers(?,?,?,?)}");
         cStmt.setString(1, us.getUsername());
         cStmt.setString(2, us.getUserpass());
         cStmt.setString(3, us.getValid());
