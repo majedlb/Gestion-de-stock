@@ -1,0 +1,118 @@
+<%@page import="entities.Product"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="database.ProductManipulations"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script language="javascript" type="text/javascript" src="../JS/jquery-1.11.0.min.js"></script>
+        <title>Manage Products</title>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#btnAddProduct").click(function () {
+                    var producname = $("#productnameNew").val();
+    // calling another page from within the same page(operator Cannot watch them because it’s only for programmer                
+                    $.ajax({
+                        //call page Manipulation /products.jsp “where if = add 
+                        url: '../manipulations/products.jsp?action=addProduct&productname='+producname,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        type: 'POST', // Type of call (“POST” or “GET”) and obtain message “product addet” or message “Error”
+                        success: function (data) {
+                            console.log("Returned from ajax : " + data);
+                            var json = $.parseJSON(data);
+                            if (json.code == 1) {
+                                alert('product addet');
+                            } else {
+                                alert('Error : ' + json.description);
+                            }
+                        },
+                        complete: function () {
+                        }
+                    });
+                });
+                $("#divAddNewProduct").hide();
+                $("#addNewProduct").click(function () {
+                $("#divAddNewProduct").show();
+                });
+                $(".butDel").click(function () {
+                    var id_value = event.target.id;
+        // calling another page from within the same page(operator Cannot watch them because it’s only for programmer 
+                    $.ajax({
+                    //call page Manipulation /products.jsp “where if = delete
+                        url: '../manipulations/products.jsp?action=deleteProduct&productID=' + id_value,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        type: 'POST', // Type of call (“POST” or “GET”) and obtain message “product deleted” or message “Error”
+                        success: function (data) {
+                            console.log("Returned from ajax : " + data);
+                            var json = $.parseJSON(data);
+                            if (json.code == 1) {
+                                alert('product deleted');
+                            } else {
+                                alert('Error : ' + json.description);
+                            }
+                        },
+                        complete: function () {
+                        }
+                    });
+                });
+
+            });
+        </script>
+    </head>
+    <body>
+        <h4>Notes: Stock/web/admin/manageProducts.jsp</h4>
+        <h1>Manage Products</h1>
+        <h2> Products List</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Product name</th>
+                    <th>Categorie ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%
+                    //SearchUser(""); : list all Products
+                    ArrayList<Product> list = ProductManipulations.SearchProduct("");
+                    for (Product prod : list) {
+                        out.println("<tr>");
+                        out.println("<td>" + prod.getId() + "</td>");
+                        out.println("<td>" + prod.getName() + "</td>");
+                        out.println("<td>" + prod.getCategorie_id() + "</td>");
+                        out.println("<td>" + "<button class=\"butDel\"  id=\"" + prod.getId() + "\">Delete</button>" + "</td>");
+                        out.println("<td>" + "<button class=\"butEdit\"  id=\"" + prod.getId() + "\">Edit</button>" + "</td>");
+                        out.println("</tr>");
+                    }
+                    out.println("</tbody>");
+                    out.println("</table>");
+                %>
+            </tbody>
+        </table>
+        <!--add new Product-->
+        <input id="addNewProduct" type="submit" value="Add New Product" />
+        <!--Creating the add new product form-->
+        <div id="divAddNewProduct">
+            <table border="1">
+                <tr>
+                    <td>Product Name</td>
+                    <td><input id="productnameNew" type="text" name="txtNewProductName" value="" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input id="btnAddProduct" type="submit" value="Add Product" /></td>
+                </tr>
+            </table>
+        </div>
+        <!--Edit Product-->
+        <div id="editProduct">
+
+        </div>
+
+    </body>
+</html>
