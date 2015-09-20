@@ -13,12 +13,14 @@
                 $("#btnAddCategorie").click(function () {
                     var namecategorie = $("#NameNew").val();
                     var desccategorie = $("#DescriptionNew").val();
+// calling another page from within the same page(operator Cannot watch them because it’s only for programmer    
                     $.ajax({
-                        url: '../manipulations/categories.jsp?action=addCategorie&categoriename='+namecategorie+'&categoriedesc='+desccategorie, 
+                        //call page Manipulation /categorie.jsp “where if = add
+                        url: '../manipulations/categories.jsp?action=addCategorie&namecategorie='+namecategorie+'&categoriedesc='+desccategorie, 
                         cache: false,
                         contentType: false,
                         processData: false,
-                        type: 'POST', // obtain message “supplier addet” or message “Error”
+                        type: 'POST', // Type of call (“POST” or “GET”) and obtain message “supplier addet” or message “Error”
                         success: function (data) {
                             console.log("Returned from ajax : " + data);
                             var json = $.parseJSON(data);
@@ -34,19 +36,37 @@
                 });
                 $("#divAddNewCategorie").hide();
                 $("#addNewCategorie").click(function () {
-                    $("#divAddNewCategorie").show();
+                   $("#divAddNewCategorie").show();
                 });
-//               $(".butDel").click(function () {
-//                    var id_value = event.target.id;
-//                    $.ajax({
-//                  *************
-//                    });
-//                });
-
+                $(".butDel").click(function () {
+                    var id_value = event.target.id;
+                    //var id_value = 2;
+        // calling another page from within the same page(operator Cannot watch them because it’s only for programmer 
+                    $.ajax({
+                    //call page Manipulation /Ccategorie.jsp “where if = delete
+                        url: '../manipulations/categories.jsp?action=deleteCategorie&categorieID=' + id_value,
+                       cache: false,
+                        contentType: false,
+                        processData: false,
+                        type: 'POST', // Type of call (“POST” or “GET”) and obtain message “categorie deleted” or message “Error”
+                        success: function (data) {
+                            console.log("Returned from ajax : " + data);
+                            var json = $.parseJSON(data);
+                            if (json.code == 1) {
+                                alert('user deleted');
+                            } else {
+                                alert('Error : ' + json.description);
+                            }
+                        },
+                        complete: function () {
+                        }
+                    });
+                });
             });
         </script>
     </head>
     <body>
+        <h4>Notes: Stock/web/admin/manageCategories.jsp</h4>
         <h1>Manage Categories</h1>
        <h1>Categories List</h1>
        <table border=”1”>
@@ -83,11 +103,11 @@
             <table border="1">
                 <tr>
                     <td>Name</td>
-                    <td><input id = "NameNew" type="text" name="txtNewCategorieName" value="" /></td>
+                    <td><input id = "NameNew" type="text" name="txtNewNameCategorie" value="" /></td>
                 </tr>
                 <tr>
                     <td>Description</td>
-                    <td><input id="DescriptionNew " type="text" name="txtNewCategorieDescription" value="" /></td>
+                    <td><input id= "DescriptionNew" type="text" name="txtNewCategorieDescription" value="" /></td>
                 </tr>
                 <tr>
                     <td></td>
