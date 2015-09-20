@@ -1,3 +1,9 @@
+<%-- 
+    Document   : mainPage
+    Created on : Aug 27, 2015, 5:19:19 PM
+    Author     : Majed1
+--%>
+
 <%@page import="entities.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -8,6 +14,7 @@
     </head>
     <body>
         <h1>Welcome <%out.println(((User) session.getAttribute("user")).getUsername());%>!</h1>
+        <h4>Notes: Stock/web/admin/mainPage.jsp</h4>
         <h1>Main Page</h1>
         <table border="0" cellpadding="2">
             <tbody>
@@ -21,7 +28,7 @@
                     <td><input type="submit" value="Manage Categories" name="manageCategories" onclick="location.href='manageCategories.jsp';"  /></td>
                 </tr>
                 <tr>
-                    <td><input type="submit" value="manage Products" ame="manageProducts"/></td>
+                    <td><input type="submit" value="manage Products" ame="manageProducts" onclick="location.href='manageProducts.jsp';" /></td>
                 </tr>
                 
                 <tr>
