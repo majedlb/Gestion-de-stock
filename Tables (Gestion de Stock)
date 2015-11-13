@@ -1,0 +1,181 @@
+CREATE TABLE `stocdatabase`.`category` (
+  `idCategory` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `Categorydesc` NVARCHAR(255) NULL COMMENT '',
+  `CategoryName` NVARCHAR(255) NULL COMMENT '',
+  PRIMARY KEY (`idCategory`)  COMMENT '');
+
+
+
+CREATE TABLE `stocdatabase`.`city` (
+  `idCity` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `CityName` VARCHAR(255) NULL COMMENT '',
+  PRIMARY KEY (`idCity`)  COMMENT '');
+
+CREATE TABLE `stocdatabase`.`locations` (
+  `idlocations` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `locationsName` VARCHAR(255) NULL COMMENT '',
+  `citfk` INT NULL COMMENT '',
+  PRIMARY KEY (`idlocations`)  COMMENT '',
+  INDEX `idCity_idx` (`citfk` ASC)  COMMENT '',
+  CONSTRAINT `idCity`
+    FOREIGN KEY (`citfk`)
+    REFERENCES `stocdatabase`.`city` (`idCity`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+CREATE TABLE `stocdatabase`.`product` (
+  `idproduct` INT NOT NULL AUTO_INCREMENT COMMENT '',
+`productmodel` NVARCHAR(255) NOT NULL COMMENT '',  `productname` NVARCHAR(255) NULL COMMENT '',
+  `productQuantity` INT NULL COMMENT '',
+  `prix` INT NULL COMMENT '',
+  `Rdate` NVARCHAR(255) NULL COMMENT '',
+  `catfk` INT NOT NULL COMMENT '',
+  PRIMARY KEY (`idproduct`)  COMMENT '',
+  INDEX `catfk_idx` (`catfk` ASC)  COMMENT '',
+  CONSTRAINT `catfk`
+    FOREIGN KEY (`catfk`)
+    REFERENCES `stocdatabase`.`category` (`idCategory`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+CREATE TABLE `stocdatabase`.`branch` (
+  `idbranch` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `branchname` NVARCHAR(255) NULL COMMENT '',`branchvillage` NVARCHAR(255) not NULL COMMENT ''
+ , `branchdistrict` NVARCHAR(255) not NULL COMMENT '' , `branchphone` NVARCHAR(255) NULL COMMENT '',
+
+  PRIMARY KEY (`idbranch`)  COMMENT '');
+
+
+CREATE TABLE `stocdatabase`.`stock` (
+  `Stockid` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `Stockname` NVARCHAR(255) NULL COMMENT '',
+  `Stockphone` NVARCHAR(255) NULL COMMENT '',
+  `BID` INT NOT NULL COMMENT '',
+  PRIMARY KEY (`Stockid`)  COMMENT '',
+  INDEX `bid_idx` (`BID` ASC)  COMMENT '',
+  CONSTRAINT `idbranch`
+    FOREIGN KEY (`BID`)
+    REFERENCES `stocdatabase`.`branch` (`idbranch`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+CREATE TABLE `stocdatabase`.`stocpro` (
+  `Stocid` INT NOT NULL COMMENT '',
+  `prodid1` INT NOT NULL COMMENT '',
+  PRIMARY KEY (`Stocid`, `prodid1`)  COMMENT '',
+  INDEX `prodid1_idx` (`prodid1` ASC)  COMMENT '',
+  CONSTRAINT `stocid`
+    FOREIGN KEY (`Stocid`)
+    REFERENCES `stocdatabase`.`stock` (`Stockid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `prodid1`
+    FOREIGN KEY (`prodid1`)
+    REFERENCES `stocdatabase`.`product` (`idproduct`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+CREATE TABLE `stocdatabase`.`supplier` (
+  `Supplierid` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `SupplierName` VARCHAR(45) NULL COMMENT '',
+  `SupplierEmail` VARCHAR(45) NULL COMMENT '',
+  `Supplieraddress` VARCHAR(45) NULL COMMENT '',
+  `Supplierphone` VARCHAR(45) NULL COMMENT '',
+  PRIMARY KEY (`Supplierid`)  COMMENT '');
+
+
+CREATE TABLE `stocdatabase`.`supprod` (
+  `idsup` INT NOT NULL COMMENT '',
+  `idprod` INT NOT NULL COMMENT '',
+  PRIMARY KEY (`idsup`, `idprod`)  COMMENT '',
+  INDEX `idsup_idx` (`idprod` ASC)  COMMENT '',
+  CONSTRAINT `idsup`
+    FOREIGN KEY (`idprod`)
+    REFERENCES `stocdatabase`.`supplier` (`Supplierid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `idprod`
+    FOREIGN KEY (`idprod`)
+    REFERENCES `stocdatabase`.`product` (`idproduct`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+CREATE TABLE `stocdatabase`.`departement` (
+  `Depid` INT NOT NULL COMMENT '',
+  `Depname` VARCHAR(255) NULL COMMENT '',
+  `Depphone` VARCHAR(45) NULL COMMENT '',
+  `stkid` INT NOT NULL COMMENT '',
+  `bid` INT NOT NULL COMMENT '',
+  PRIMARY KEY (`Depid`)  COMMENT '',
+  INDEX `stkid_idx` (`stkid` ASC)  COMMENT '',
+  INDEX `bid_idx` (`bid` ASC)  COMMENT '',
+  CONSTRAINT `stkid`
+    FOREIGN KEY (`stkid`)
+    REFERENCES `stocdatabase`.`stock` (`Stockid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `bid`
+    FOREIGN KEY (`bid`)
+    REFERENCES `stocdatabase`.`branch` (`idbranch`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+
+CREATE TABLE `stocdatabase`.`proddep` (
+  `pid` INT NOT NULL COMMENT '',
+  `depid` INT NOT NULL COMMENT '',
+  `pquantity` INT NOT NULL COMMENT '',
+  PRIMARY KEY (`pid`, `depid`)  COMMENT '',
+  INDEX `deid_idx` (`depid` ASC)  COMMENT '',
+  CONSTRAINT `pid`
+    FOREIGN KEY (`pid`)
+    REFERENCES `stocdatabase`.`product` (`idproduct`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `deid`
+    FOREIGN KEY (`depid`)
+    REFERENCES `stocdatabase`.`departement` (`Depid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+CREATE TABLE `stocdatabase`.`user` (
+  `userid` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `username` VARCHAR(255) NOT NULL COMMENT '',
+  `password` VARCHAR(255) NOT NULL COMMENT '',
+  `role` VARCHAR(255) NOT NULL COMMENT '',`Stockid` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`userid`)  COMMENT '');
+
+
+CREATE TABLE `stocdatabase`.`transfer` (
+  `transferid` INT NOT NULL AUTO_INCREMENT,
+  `sourcestock` VARCHAR(255) NOT NULL,
+  `destinationstock` VARCHAR(255) NOT NULL,
+  `sourcedate` VARCHAR(255) NULL,
+  `destinationdate` VARCHAR(255) NULL,
+  `driverid` INT NULL,
+  `carnumber` VARCHAR(255) NULL,
+  `validatedestinationstock` VARCHAR(255) NULL,
+  `productid` INT NULL,
+  `productquantity` INT NULL,
+  `productmodel` VARCHAR(255) NULL,
+  PRIMARY KEY (`transferid`));
+
+
+CREATE TABLE `stocdatabase`.`driver` (
+  `driverid` INT NOT NULL AUTO_INCREMENT,
+  `drivername` VARCHAR(255) NOT NULL,
+  `driverphone` VARCHAR(255) NOT NULL,
+  `driverlecense` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`driverid`));
+
+
+
+CREATE TABLE `stocdatabase`.`employeeinfo` (
+  `idEmployeeInfo` INT NOT NULL AUTO_INCREMENT,
+  `Employee_Name` VARCHAR(255) NOT NULL,
+  `Emploee_Email` VARCHAR(255) NULL,
+  `Employee_Phone` VARCHAR(45) NULL,
+  PRIMARY KEY (`idEmployeeInfo`));

@@ -1,0 +1,138 @@
+/* global id */
+
+<%@page import="entities.User"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="database.UserManipulations"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script language="javascript" type="text/javascript" src="../JS/jquery-1.11.0.min.js"></script>
+        <title>Manage Users</title>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#btnAddUser").click(function () {
+                    var username = $("#usernameNew").val();
+                    var password = $("#passwordNew").val();
+                    var type = $("#typeNew").val();
+// calling another page from within the same page(operator Cannot watch them because it’s only for programmer                
+                    $.ajax({
+                        //call page Manipulation /suppliers.jsp “where if = add 
+                        url: '../manipulations/users.jsp?action=addUser&username='+username+'&passwd='+password+'&type='+type,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        type: 'POST', // Type of call (“POST” or “GET”) and obtain message “supplier addet” or message “Error”
+                        success: function (data) {
+                            console.log("Returned from ajax : " + data);
+                            var json = $.parseJSON(data);
+                            if (json.code == 1) {
+                                alert('user addet');
+                            } else {
+                                alert('Error : ' + json.description);
+                            }
+                        },
+                        complete: function () {
+                        }
+                    });
+                });
+                $("#divAddNewUser").hide();
+                $("#addNewUser").click(function () {
+                $("#divAddNewUser").show();
+                });
+                $(".butDel").click(function () {
+                    var id_value = event.target.id;
+        // calling another page from within the same page(operator Cannot watch them because it’s only for programmer 
+                    $.ajax({
+                    //call page Manipulation /users.jsp “where if = delete
+                        url: '../manipulations/users.jsp?action=deleteUser&userID=' + id_value,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        type: 'POST', // Type of call (“POST” or “GET”) and obtain message “user deleted” or message “Error”
+                        success: function (data) {
+                            console.log("Returned from ajax : " + data);
+                            var json = $.parseJSON(data);
+                            if (json.code == 1) {
+                                alert('user deleted');
+                            } else {
+                                alert('Error : ' + json.description);
+                            }
+                        },
+                        complete: function () {
+                        }
+                    });
+                });
+
+            });
+        </script>
+    </head>
+    <body>
+        <h4>Notes: Stock/web/admin/manageUsers.jsp</h4>
+        <h1>Manage Users</h1>
+        <h2> Users List</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Type</th>
+                    <th>Employee ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%
+                    //SearchUser(""); : list all users
+                    ArrayList<User> list = UserManipulations.SearchUser("");
+                    for (User u : list) {
+                        out.println("<tr>");
+                        out.println("<td>" + u.getId() + "</td>");
+                        out.println("<td>" + u.getUsername() + "</td>");
+                        out.println("<td>" + u.getUserpass() + "</td>");
+                        out.println("<td>" + u.getValid() + "</td>");
+                        out.println("<td>" + u.getEmployee_id() + "</td>");
+                        out.println("<td>" + "<button class=\"butDel\"  id=\"" + u.getId() + "\">Delete</button>" + "</td>");
+                        out.println("<td>" + "<button class=\"butEdit\"  id=\"" + u.getId() + "\">Edit</button>" + "</td>");
+                        out.println("</tr>");
+                    }
+                    out.println("</tbody>");
+                    out.println("</table>");
+                %>
+            </tbody>
+        </table>
+        <!--add new User-->
+        <input id="addNewUser" type="submit" value="Add New User" />
+        <!--Creating the add new user form-->
+        <div id="divAddNewUser">
+            <table border="1">
+                <tr>
+                    <td>Username</td>
+                    <td><input id="usernameNew" type="text" name="txtNewUserName" value="" /></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input id = "passwordNew" type="password" name="txtNewUserPassword" value="" /></td>
+                </tr>
+                <tr>
+                    <td>User Type</td>
+                    <td><select id="typeNew" name="cmbNewUserType">
+                            <option value="u">user</option>
+                            <option value="a">admin</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input id="btnAddUser" type="submit" value="Add User" /></td>
+                </tr>
+            </table>
+        </div>
+        <!--Edit Supplier-->
+        <div id="editUser">
+
+        </div>
+
+    </body>
+</html>

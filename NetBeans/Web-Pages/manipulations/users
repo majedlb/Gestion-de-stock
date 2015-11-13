@@ -1,0 +1,49 @@
+<%@page import="database.UserManipulations"%>
+<%@page import="entities.User"%>
+<%@page import="Classes.Response"%>
+<%@page trimDirectiveWhitespaces="true"%>
+<%@ page contentType="text/html"%>
+<%
+    Response resp = new Response();
+    if (request.getMethod().equals("POST")) {
+        try {
+            String action = request.getParameter("action");
+            if (action.equals("deleteUser")) {
+                String userid = request.getParameter("userID");
+                User u = UserManipulations.getUserInfobyID(Integer.parseInt(userid));
+                if (UserManipulations.deleteUser(u.getUsername())) {
+                    resp.setCode(1);
+                    resp.setDescription("Delete successful");
+                } else {
+                    resp.setCode(0);
+                    resp.setDescription("Delete failed");
+                }
+                out.print(resp);
+            } else if (action.equals("addUser")) {
+                String uname = request.getParameter("username");
+                String pssd = request.getParameter("passwd");
+                String type = request.getParameter("type");
+                User u = new User(0, uname, pssd, type, 1);
+                if (UserManipulations.addNewUsers(u)) {
+                    resp.setCode(1);
+                    resp.setDescription("add successful");
+                } else {
+                    resp.setCode(0);
+                    resp.setDescription("add failed");
+                }
+                out.print(resp);
+            } else if (action.equals("")) {
+
+            } else if (action.equals("")) {
+
+            } else if (action.equals("")) {
+            } else if (action.equals("")) {
+            } else {
+            }
+        } catch (Exception e) {
+            resp.setCode(0);
+            resp.setDescription(e.getMessage());
+            out.println(resp);
+        }
+    }
+%>

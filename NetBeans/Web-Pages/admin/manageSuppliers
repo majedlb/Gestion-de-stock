@@ -1,0 +1,138 @@
+<%@page import="entities.Supplier"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="database.SupplierManipulations"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script language="javascript" type="text/javascript" src="../JS/jquery-1.11.0.min.js"></script>
+        <title>Manage Supplier</title>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#btnAddSupplier").click(function () {
+                    var namesupplier = $("#NameNew").val();
+                    var telsupplier = $("#TelNew").val();
+                    var addresssupplier = $("#AddressNew").val();
+                    var emailsupplier = $("#EmailNew").val();
+// calling another page from within the same page(operator Cannot watch them because it’s only for programmer    
+                    $.ajax({
+                        //call page Manipulation /suppliers.jsp “where if = add
+          url: '../manipulations/suppliers.jsp?action=addSupplier&suppliername='+namesupplier+'&suppliertel='+telsupplier+'&supplieraddress='+addresssupplier+'&supplieremail='+emailsupplier, 
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        type: 'POST', // Type of call (“POST” or “GET”) and obtain message “supplier addet” or message “Error”
+                        success: function (data) {
+                            console.log("Returned from ajax : " + data);
+                            var json = $.parseJSON(data);
+                            if (json.code == 1) {
+                                alert('supplier addet');
+                            } else {
+                                alert('Error : ' + json.description);
+                            }
+                        },
+                        complete: function () {
+                        }
+                    });
+                });
+                $("#divAddNewSupplier").hide();
+                $("#addNewSupplier").click(function () {
+                $("#divAddNewSupplier").show();
+                });
+               $(".butDel").click(function () {
+                    var id_value = event.target.id;
+                     //var id_value = 10;
+                    // calling another page from within the same page(operator Cannot watch them because it’s only for programmer 
+                   $.ajax({
+                    //call page Manipulation /suppliers.jsp “where if = delete
+                        url: '../manipulations/suppliers.jsp?action=deleteSupplier&supplierid=' + id_value,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        type: 'POST', // Type of call (“POST” or “GET”) and obtain message “supplier deleted” or message “Error”
+                        success: function (data) {
+                            console.log("Returned from ajax : " + data);
+                            var json = $.parseJSON(data);
+                            if (json.code==1) {
+                                alert('supplier deleted');
+                            } else {
+                                alert('Error : ' + json.description);
+                            }
+                        },
+                        complete: function () {
+                        }
+                    });
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <h4>Notes: Stock/web/admin/manageSuppliers.jsp</h4>
+        <h1>Manage Suppliers</h1>
+       <h1>Suppliers List</h1>
+       <table border=”1”>
+           <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>phone</th>
+                    <th>Address</th>
+                    <th>Email</th>
+                </tr>
+       </thead>
+            <tbody>
+                <%
+                    //SearchUser(""); : list all users
+                    ArrayList<Supplier> list = SupplierManipulations.SearchSupplier ("");
+                    for (Supplier supp : list) {
+                        out.println("<tr>");
+                        out.println("<td>" + supp.getId() + "</td>");
+                        out.println("<td>" + supp.getName() + "</td>");
+                        out.println("<td>" + supp.getPhone() + "</td>");
+                        out.println("<td>" + supp.getAdress() + "</td>");
+                        out.println("<td>" + supp.getEmail() + "</td>");
+                        out.println("<td>" + "<button class=\"butDel\"  id=\"" + supp.getId() + "\">Delete</button>" + "</td>");
+                        out.println("<td>" + "<button class=\"butEdit\"  id=\"" + supp.getId() + "\">Edit</button>" + "</td>");
+                        out.println("</tr>");
+                    }
+                    out.println("</tbody>");
+                    out.println("</table>");
+                %>
+            </tbody>
+        </table>
+<!--add new Supplier-->
+       <input id="addNewSupplier" type="submit" value="Add New Supplier" />
+        <!--Creating the add new Supplier form-->
+     <div id="divAddNewSupplier">
+            <h1>Add Suppliers</h1>
+            <table border="1">
+                <tr>
+                    <td>Name</td>
+                    <td><input id = "NameNew" type="text" name="txtNewSupplierName" value="" /></td>
+                </tr>
+                 <tr>
+                    <td>Tel</td>
+                    <td><input id="TelNew" type="text" name="txtNewSupplierTel" value="" /></td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td><input id="AddressNew" type="text" name="txtNewSupplierAdress" value="" /></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input id="EmailNew" type="text" name="txtNewSupplierEmail" value="" /></td>
+                </tr>
+               
+                <tr>
+                    <td></td>
+                   <td><input id="btnAddSupplier" type="submit" value="Add Supplier" /></td>
+                </tr>
+            </table>
+        </div>
+<!--Edit Supplier-->
+        <div id="editSupplier">
+
+        </div>
+    </body>
+</html>

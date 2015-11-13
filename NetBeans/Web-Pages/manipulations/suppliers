@@ -1,0 +1,49 @@
+<%@page import="database.SupplierManipulations"%>
+<%@page import="entities.Supplier"%>
+<%@page import="Classes.Response"%>
+<%@page trimDirectiveWhitespaces="true"%>
+<%@ page contentType="text/html"%>
+<%
+    Response resp = new Response();
+    if (request.getMethod().equals("POST")) {
+        try {
+            String action = request.getParameter("action");
+            if (action.equals("deleteSupplier")) {
+             String suppid = request.getParameter("supplierid");
+             Supplier supp = SupplierManipulations.getSupplierInfobyID(Integer.parseInt(suppid));
+            if (SupplierManipulations.deleteSupplier(supp.getName())) {
+                   resp.setCode(1);
+                  resp.setDescription("Delete successful");
+              } else {
+                 resp.setCode(0);
+                resp.setDescription("Delete failed");
+            }
+               out.print(resp);
+       } else if (action.equals("addSupplier")) {
+                String suppname = request.getParameter("suppliername");
+                String supptel = request.getParameter("suppliertel");
+                String suppadress = request.getParameter("supplieraddress");
+                String suppemail = request.getParameter("supplieremail");
+                Supplier supp = new Supplier(0, suppname, supptel, suppadress, suppemail);
+                if (SupplierManipulations.addNewSupplier(supp)) {
+                    resp.setCode(1);
+                    resp.setDescription("add successful");
+                } else {
+                    resp.setCode(0);
+                    resp.setDescription("add failed");
+                }
+                out.print(resp);
+            } else if (action.equals("")) {
+            } else if (action.equals("")) {
+            } else if (action.equals("")) {
+            } else if (action.equals("")) {
+            } else if (action.equals("")) {
+            } else {
+            }
+        } catch (Exception e) {
+            resp.setCode(0);
+            resp.setDescription(e.getMessage());
+            out.println(resp);
+        }
+    }
+ %>

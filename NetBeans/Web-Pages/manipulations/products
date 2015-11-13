@@ -1,0 +1,48 @@
+<%@page import="database.ProductManipulations"%>
+<%@page import="entities.Product"%>
+<%@page import="Classes.Response"%>
+<%@page trimDirectiveWhitespaces="true"%>
+<%@ page contentType="text/html"%>
+<%
+    Response resp = new Response();
+    if (request.getMethod().equals("POST")) {
+        try {
+            String action = request.getParameter("action");
+            if (action.equals("deleteProduct")) {
+                String productid = request.getParameter("productID");
+                Product prod = ProductManipulations.getProductInfobyID(Integer.parseInt(productid));
+                if (ProductManipulations.deleteProduct(prod.getName())) {
+                    resp.setCode(1);
+                    resp.setDescription("Delete successful");
+                } else {
+                    resp.setCode(0);
+                    resp.setDescription("Delete failed");
+                }
+                out.print(resp);
+            } else 
+                if (action.equals("addProduct")) {
+                String prodname = request.getParameter("productname");
+                Product prodn = new Product(0,prodname,1);
+                if (ProductManipulations.addNewProduct(prodn)) {
+                    resp.setCode(1);
+                    resp.setDescription("add successful");
+                } else {
+                    resp.setCode(0);
+                    resp.setDescription("add failed");
+                }
+                out.print(resp);
+            } else if (action.equals("")) {
+
+            } else if (action.equals("")) {
+
+            } else if (action.equals("")) {
+            } else if (action.equals("")) {
+            } else {
+            }
+        } catch (Exception e) {
+            resp.setCode(0);
+            resp.setDescription(e.getMessage());
+            out.println(resp);
+        }
+    }
+%>
